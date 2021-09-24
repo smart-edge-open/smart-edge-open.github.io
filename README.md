@@ -1,1 +1,1 @@
-# open-ness.github.io
+#smart-edge-open.github.io
