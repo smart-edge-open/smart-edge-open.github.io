@@ -52,24 +52,6 @@ function contactformsubmit() {
 
 }
 jQuery(document).ready(function () {
-
-    /*jQuery('#agreecheck').on('change', function(){
-         if(jQuery(this).is(':checked')){
-             jQuery('small[for="agreecheck"]').css('display','none');
-         }else{
-             jQuery('small[for="agreecheck"]').css('display','block');
-         }
-    });
-     $url = 'https://builders-staging.onsumaye.com/universityapi/api/v1/company-list';
-        $domain = 'openness.org';
-        $token = 'e96bff9b6381e0e8175b0595b08cd6d1';
-        $headers = array('Content-Type: application/json','X-PW-AccessToken: '.$token, 'X-PW-DomainName: '.$domain);
-        $ch = curl_init();
-    
-    */
-
-
-
     jQuery("input[name='existing_member']").click(function () {
 
         if (jQuery('input:radio[name=existing_member]:checked').val() == "yes") {
@@ -113,43 +95,6 @@ jQuery(document).ready(function () {
             $.each(options, function (i, p) {
                 $('#companyname').append($('<option></option>').val(p).html(p));
             });
-
-            //get comany list data
-            /*   var url='https://builders.localhost.com//universityapi/api/v1/company-list';
-                     var domain = '*';
-                     var token = 'e96bff9b6381e0e8175b0595b08cd6d1';
-                     var headers =  { 'Content-Type': 'application/json',
-                     "Access-Control-Allow-Origin":"*",
-                       'X-PW-AccessToken': token, 
-                       'X-PW-DomainName': domain }
-         
-                                  var xhr = new XMLHttpRequest();
-         xhr.open('POST', url);
-         xhr.setRequestHeader('Content-type','application/json');
-         xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-         xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
-         xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-         xhr.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-         xhr.send();
-         xhr.onreadystatechange = function() {
-          // if (this.readyState == 4 && this.status == 200) {
-             console.log(this.responseText);
-          // }
-         };*/
-
-            /* $.ajax({
-               type: "POST",
-               url: url,
-               headers: headers, 
-               crossDomain: true,
-              // dataType: 'json',
-               success: function (data) {
-                   console.log(data);
-               // var result=data;
-               // $('#result').attr("value",result);
-
-               }
-               });*/
 
         } else if (jQuery('input:radio[name=existing_member]:checked').val() == "no") {
             $(".cn-no").show();
