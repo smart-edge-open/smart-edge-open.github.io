@@ -1,0 +1,33 @@
+title: "Getting Started (Licensed)"
+path: /getting-started-licensed/
+order: 6
+section:
+  - title: Cluster Setup
+    path: /ido-specs/docs/getting-started/openness-cluster-setup
+    meta_title: 
+    meta_description: 
+    
+  - title: Converged Edge Experience Kits
+    path: /ido-specs/docs/getting-started/converged-edge-experience-kits
+    meta_title: 
+    meta_description: 
+    
+  - title: Offline Deployment
+    path: /ido-specs/docs/getting-started/offline-edge-deployment
+    meta_title: 
+    meta_description: 
+       
+  - title: Non-root User
+    path: /ido-specs/docs/getting-started/non-root-user
+    meta_title: 
+    meta_description: 
+       
+  - title: Harbor Registry Service
+    path: /ido-specs/docs/getting-started/harbor-registry
+    meta_title: 
+    meta_description: 
+       
+  - title: Kubernetes Dashboard
+    path: /ido-specs/docs/getting-started/kubernetes-dashboards
+    meta_title: 
+    meta_description: 
