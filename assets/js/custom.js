@@ -73,8 +73,37 @@ jQuery(document).ready(function () {
     jQuery("input[name='existing_member']").click(function () {
 
         if (jQuery('input:radio[name=existing_member]:checked').val() == "yes") {
+            $('#companyname').empty();
+            $('#companyname').append('<option value="" selected="selected">Select Company</option>');
             $(".cn-no").hide();
             $(".cn-yes").show();
+            var opurl = apiURL+'/index.php?option=com_products&task=getCompanylist_json';
+            var form = $("#contact");
+            var url =
+                $.ajax({
+                    type: form.attr('method'),
+                    url: opurl,
+                    crossDomain: true,
+                    //data: form.serialize(),
+                    success: function (data) {
+                        var data = jQuery.parseJSON(data)
+                        if(typeof data.status != 'undefined'){
+                            if(data.status == 200){
+                                $.each(data.data, function (i, p) {
+                                    $('#companyname').append($('<option></option>').val(p.company_name).html(p.company_name));
+                                });
+                            }else{
+                                alert(data.errMsg);
+                            }
+                        }else{
+                            alert('Error in getting Company Data');
+                        }
+                    }
+                });
+            
+            
+            
+            
             var options = ['128 Technology', '3nfinite', '5x9 Networks', '5x9 Networks', '99cloud'
                 , 'A TLC srl', 'A1 TELEKOM AUSTRIA AG', 'A1 TELEKOM AUSTRIA AG', 'A5G Networks', 'AAEON', 'Aarna Networks, Inc.',
                 'Accedian', 'Accelercomm', 'Acceleron Labs', 'Accenture, LLP', 'Accelleran', 'AcceAccton Technology', 'Actian Corporation'];
