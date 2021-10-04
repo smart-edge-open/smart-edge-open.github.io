@@ -1,7 +1,6 @@
 ---
 layout: page
 permalink: /request-license/
-title: Intel® Smart Edge Open - Request a License, Smart Edge Open license
 description: Please select a topic below related to your inquiry. If you don’t find what you need, fill out the Intel® Smart Edge Open contact form.
 ---
 <link rel="stylesheet" type="text/css" href="{{ "/assets/css/select2.min.css?v=8.5" | relative_url }}">

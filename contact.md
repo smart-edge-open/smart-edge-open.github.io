@@ -1,7 +1,6 @@
 ---
 layout: page
 permalink: /contact/
-title: Intel® Smart Edge Open - Contact
 description: Please select a topic below related to your inquiry. If you don’t find what you need, fill out the Intel® Smart Edge Open contact form.
 ---
 <script type="text/javascript" src="{{ "/assets/js/jquery.validate.min.js" | relative_url }}"></script>
