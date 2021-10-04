@@ -36,16 +36,6 @@
         .boxHeadBox{
             position: relative;
             padding-right: 50px;
-            &:not(:nth-child(3n)){
-                &:after{
-                    content: "";
-                    position: absolute;
-                    width: 4px;
-                    height: 100%;
-                    background-color: $blue;
-                    right: 0px;
-                }
-            }
             &:last-child{
                 &:after{
                     display: none;
@@ -81,6 +71,16 @@
                 list-style-type: none;
             }
         }
+    }
+}
+@media (min-width:960px){
+    .boxHead.boxes5 .boxHeadBox:not(:nth-child(3n)):after{
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        background-color: $blue;
+        right: 0px;
     }
 }
 @media (max-width:1199px){

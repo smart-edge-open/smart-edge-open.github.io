@@ -4,6 +4,9 @@
     *{
         text-align: left;
     }
+    .uk-button-small{
+        cursor: default;
+    }
 }
 .noteLeft{
     clear: both;
@@ -13,5 +16,18 @@
     &:not(:last-child){
         border-bottom: 1px solid $menuColor;
         margin-bottom: 40px;
+    }
+}
+@media (max-width:991px){
+    .noteLeft{
+        width: 22%;
+    }
+    .noteRight{
+        width:78%;
+    }
+}
+@media (max-width:767px){
+    .noteLeft, .noteRight{
+        width:100%;
     }
 }

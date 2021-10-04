@@ -25,3 +25,18 @@
         }
     }
 }
+@media (max-width:991px){
+    .uk-list{
+        li{
+            a{
+                padding-right: 40px;
+                .linkText{
+                    font-size: 14px;
+                }
+                svg{
+                    right:12px;
+                }
+            }
+        }
+    }
+}

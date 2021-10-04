@@ -14,6 +14,9 @@ header ~ .uk-section{
         padding-bottom: 100px;
     }
 }
+.uk-button{
+    font-family: 'Intel One Display Regular';
+}
 .uk-button-info{
     background-color: $infoColor;
     color:#fff;
@@ -29,6 +32,15 @@ header ~ .uk-section{
     transition: 0.5s;
     &:hover{
         background-color: darken($dangerColor, 20%);
+        color:#fff;
+    }
+}
+.uk-button-warning{
+    background-color: $warningColor;
+    color:#fff;
+    transition: 0.5s;
+    &:hover{
+        background-color: darken($warningColor, 20%);
         color:#fff;
     }
 }
