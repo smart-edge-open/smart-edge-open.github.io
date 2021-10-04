@@ -214,18 +214,18 @@
             obj[prop] = value, obj;
         },
         contain: function(dimensions, maxDimensions) {
-            var this$1 = this;
+            var this$1$1 = this;
             dimensions = assign({}, dimensions);
             each(dimensions, function(_, prop) {
-                return dimensions = dimensions[prop] > maxDimensions[prop] ? this$1.ratio(dimensions, prop, maxDimensions[prop]) : dimensions;
+                return dimensions = dimensions[prop] > maxDimensions[prop] ? this$1$1.ratio(dimensions, prop, maxDimensions[prop]) : dimensions;
             });
             return dimensions;
         },
         cover: function(dimensions, maxDimensions) {
-            var this$1 = this;
+            var this$1$1 = this;
             dimensions = this.contain(dimensions, maxDimensions);
             each(dimensions, function(_, prop) {
-                return dimensions = dimensions[prop] < maxDimensions[prop] ? this$1.ratio(dimensions, prop, maxDimensions[prop]) : dimensions;
+                return dimensions = dimensions[prop] < maxDimensions[prop] ? this$1$1.ratio(dimensions, prop, maxDimensions[prop]) : dimensions;
             });
             return dimensions;
         }
@@ -337,8 +337,9 @@
             return matches(element, selInput);
         });
     }
+    var selFocusable = selInput + ",a[href],[tabindex]";
     function isFocusable(element) {
-        return isInput(element) || matches(element, "a[href],button") || hasAttr(element, "tabindex");
+        return matches(element, selFocusable);
     }
     function parent(element) {
         element = toNode(element);
@@ -557,14 +558,14 @@
         return args;
     }
     function delegate(selector, listener) {
-        var this$1 = this;
+        var this$1$1 = this;
         return function(e) {
             var current = selector[0] === ">" ? findAll(selector, e.currentTarget).reverse().filter(function(element) {
                 return within(e.target, element);
             })[0] : closest(e.target, selector);
             if (current) {
                 e.current = current;
-                listener.call(this$1, e);
+                listener.call(this$1$1, e);
             }
         };
     }
@@ -608,10 +609,10 @@
     }
     var Promise$1 = inBrowser && window.Promise || PromiseFn;
     var Deferred = function() {
-        var this$1 = this;
+        var this$1$1 = this;
         this.promise = new Promise$1(function(resolve, reject) {
-            this$1.reject = reject;
-            this$1.resolve = resolve;
+            this$1$1.reject = reject;
+            this$1$1.resolve = resolve;
         });
     };
     var RESOLVED = 0;
@@ -718,27 +719,27 @@
         }
     };
     p.notify = function notify() {
-        var this$1 = this;
+        var this$1$1 = this;
         async(function() {
-            if (this$1.state !== PENDING) {
-                while (this$1.deferred.length) {
-                    var ref = this$1.deferred.shift();
+            if (this$1$1.state !== PENDING) {
+                while (this$1$1.deferred.length) {
+                    var ref = this$1$1.deferred.shift();
                     var onResolved = ref[0];
                     var onRejected = ref[1];
                     var resolve = ref[2];
                     var reject = ref[3];
                     try {
-                        if (this$1.state === RESOLVED) {
+                        if (this$1$1.state === RESOLVED) {
                             if (isFunction(onResolved)) {
-                                resolve(onResolved.call(undefined, this$1.value));
+                                resolve(onResolved.call(undefined, this$1$1.value));
                             } else {
-                                resolve(this$1.value);
+                                resolve(this$1$1.value);
                             }
-                        } else if (this$1.state === REJECTED) {
+                        } else if (this$1$1.state === REJECTED) {
                             if (isFunction(onRejected)) {
-                                resolve(onRejected.call(undefined, this$1.value));
+                                resolve(onRejected.call(undefined, this$1$1.value));
                             } else {
-                                reject(this$1.value);
+                                reject(this$1$1.value);
                             }
                         }
                     } catch (e) {
@@ -749,10 +750,10 @@
         });
     };
     p.then = function then(onResolved, onRejected) {
-        var this$1 = this;
+        var this$1$1 = this;
         return new PromiseFn(function(resolve, reject) {
-            this$1.deferred.push([ onResolved, onRejected, resolve, reject ]);
-            this$1.notify();
+            this$1$1.deferred.push([ onResolved, onRejected, resolve, reject ]);
+            this$1$1.notify();
         });
     };
     p.catch = function(onRejected) {
@@ -1392,7 +1393,7 @@
     MouseTracker.prototype = {
         positions: [],
         init: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             this.positions = [];
             var position;
             this.unbind = on(document, "mousemove", function(e) {
@@ -1402,9 +1403,9 @@
                 if (!position) {
                     return;
                 }
-                this$1.positions.push(position);
-                if (this$1.positions.length > 5) {
-                    this$1.positions.shift();
+                this$1$1.positions.push(position);
+                if (this$1$1.positions.length > 5) {
+                    this$1$1.positions.shift();
                 }
             }, 50);
         },
@@ -1935,6 +1936,7 @@
         isVisible: isVisible,
         selInput: selInput,
         isInput: isInput,
+        selFocusable: selFocusable,
         isFocusable: isFocusable,
         parent: parent,
         filter: filter$1,
@@ -2071,11 +2073,11 @@
     }
     function hooksAPI(UIkit) {
         UIkit.prototype._callHook = function(hook) {
-            var this$1 = this;
+            var this$1$1 = this;
             var handlers = this.$options[hook];
             if (handlers) {
                 handlers.forEach(function(handler) {
-                    return handler.call(this$1);
+                    return handler.call(this$1$1);
                 });
             }
         };
@@ -2105,7 +2107,7 @@
             delete this._watch;
         };
         UIkit.prototype._callUpdate = function(e) {
-            var this$1 = this;
+            var this$1$1 = this;
             if (e === void 0) e = "update";
             if (!this._connected) {
                 return;
@@ -2119,29 +2121,29 @@
             if (!this._updates) {
                 this._updates = new Set();
                 fastdom.read(function() {
-                    if (this$1._connected) {
-                        runUpdates.call(this$1, this$1._updates);
+                    if (this$1$1._connected) {
+                        runUpdates.call(this$1$1, this$1$1._updates);
                     }
-                    delete this$1._updates;
+                    delete this$1$1._updates;
                 });
             }
             this._updates.add(e.type || e);
         };
         UIkit.prototype._callWatches = function() {
-            var this$1 = this;
+            var this$1$1 = this;
             if (this._watch) {
                 return;
             }
             var initial = !hasOwn(this, "_watch");
             this._watch = fastdom.read(function() {
-                if (this$1._connected) {
-                    runWatches.call(this$1, initial);
+                if (this$1$1._connected) {
+                    runWatches.call(this$1$1, initial);
                 }
-                this$1._watch = null;
+                this$1$1._watch = null;
             });
         };
         function runUpdates(types) {
-            var this$1 = this;
+            var this$1$1 = this;
             var updates = this.$options.update;
             var loop = function(i) {
                 var ref = updates[i];
@@ -2155,14 +2157,14 @@
                 }
                 var result = void 0;
                 if (read) {
-                    result = read.call(this$1, this$1._data, types);
+                    result = read.call(this$1$1, this$1$1._data, types);
                     if (result && isPlainObject(result)) {
-                        assign(this$1._data, result);
+                        assign(this$1$1._data, result);
                     }
                 }
                 if (write && result !== false) {
                     fastdom.write(function() {
-                        return write.call(this$1, this$1._data, types);
+                        return write.call(this$1$1, this$1$1._data, types);
                     });
                 }
             };
@@ -2245,7 +2247,7 @@
             }
         };
         UIkit.prototype._initEvents = function() {
-            var this$1 = this;
+            var this$1$1 = this;
             this._events = [];
             var ref = this.$options;
             var events = ref.events;
@@ -2253,10 +2255,10 @@
                 events.forEach(function(event) {
                     if (!hasOwn(event, "handler")) {
                         for (var key in event) {
-                            registerEvent(this$1, event[key], key);
+                            registerEvent(this$1$1, event[key], key);
                         }
                     } else {
-                        registerEvent(this$1, event);
+                        registerEvent(this$1$1, event);
                     }
                 });
             }
@@ -2596,7 +2598,7 @@
     UIkit.data = "__uikit__";
     UIkit.prefix = "uk-";
     UIkit.options = {};
-    UIkit.version = "3.7.3";
+    UIkit.version = "3.7.4";
     globalAPI(UIkit);
     hooksAPI(UIkit);
     stateAPI(UIkit);
@@ -2774,21 +2776,21 @@
         },
         methods: {
             toggleElement: function(targets, toggle, animate) {
-                var this$1 = this;
+                var this$1$1 = this;
                 return new Promise$1(function(resolve) {
                     return Promise$1.all(toNodes(targets).map(function(el) {
-                        var show = isBoolean(toggle) ? toggle : !this$1.isToggled(el);
-                        if (!trigger(el, "before" + (show ? "show" : "hide"), [ this$1 ])) {
+                        var show = isBoolean(toggle) ? toggle : !this$1$1.isToggled(el);
+                        if (!trigger(el, "before" + (show ? "show" : "hide"), [ this$1$1 ])) {
                             return Promise$1.reject();
                         }
-                        var promise = (isFunction(animate) ? animate : animate === false || !this$1.hasAnimation ? this$1._toggle : this$1.hasTransition ? toggleHeight(this$1) : toggleAnimation(this$1))(el, show);
-                        var cls = show ? this$1.clsEnter : this$1.clsLeave;
+                        var promise = (isFunction(animate) ? animate : animate === false || !this$1$1.hasAnimation ? this$1$1._toggle : this$1$1.hasTransition ? toggleHeight(this$1$1) : toggleAnimation(this$1$1))(el, show);
+                        var cls = show ? this$1$1.clsEnter : this$1$1.clsLeave;
                         addClass(el, cls);
-                        trigger(el, show ? "show" : "hide", [ this$1 ]);
+                        trigger(el, show ? "show" : "hide", [ this$1$1 ]);
                         var done = function() {
                             removeClass(el, cls);
-                            trigger(el, show ? "shown" : "hidden", [ this$1 ]);
-                            this$1.$update(el);
+                            trigger(el, show ? "shown" : "hidden", [ this$1$1 ]);
+                            this$1$1.$update(el);
                         };
                         return promise ? promise.then(done, function() {
                             removeClass(el, cls);
@@ -2799,7 +2801,8 @@
             },
             isToggled: function(el) {
                 if (el === void 0) el = this.$el;
-                return hasClass(el, this.clsEnter) ? true : hasClass(el, this.clsLeave) ? false : this.cls ? hasClass(el, this.cls.split(" ")[0]) : !hasAttr(el, "hidden");
+                el = toNodes(el)[0];
+                return hasClass(el, this.clsEnter) ? true : hasClass(el, this.clsLeave) ? false : this.cls ? hasClass(el, this.cls.split(" ")[0]) : isVisible(el);
             },
             _toggle: function(el, toggled) {
                 if (!el) {
@@ -2899,9 +2902,9 @@
                     return $$(targets, $el);
                 },
                 watch: function(items, prev) {
-                    var this$1 = this;
+                    var this$1$1 = this;
                     items.forEach(function(el) {
-                        return hide($(this$1.content, el), !hasClass(el, this$1.clsOpen));
+                        return hide($(this$1$1.content, el), !hasClass(el, this$1$1.clsOpen));
                     });
                     if (prev || hasClass(items, this.clsOpen)) {
                         return;
@@ -2932,7 +2935,7 @@
         } ],
         methods: {
             toggle: function(item, animate) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var items = [ this.items[getIndex(item, this.items)] ];
                 var activeItems = filter$1(this.items, "." + this.clsOpen);
                 if (!this.multiple && !includes(activeItems, items[0])) {
@@ -2942,11 +2945,11 @@
                     return;
                 }
                 items.forEach(function(el) {
-                    return this$1.toggleElement(el, !hasClass(el, this$1.clsOpen), function(el, show) {
-                        toggleClass(el, this$1.clsOpen, show);
-                        attr($(this$1.$props.toggle, el), "aria-expanded", show);
-                        var content = $("" + (el._wrapper ? "> * " : "") + this$1.content, el);
-                        if (animate === false || !this$1.hasTransition) {
+                    return this$1$1.toggleElement(el, !hasClass(el, this$1$1.clsOpen), function(el, show) {
+                        toggleClass(el, this$1$1.clsOpen, show);
+                        attr($(this$1$1.$props.toggle, el), "aria-expanded", show);
+                        var content = $("" + (el._wrapper ? "> * " : "") + this$1$1.content, el);
+                        if (animate === false || !this$1$1.hasTransition) {
                             hide(content, !show);
                             return;
                         }
@@ -2954,15 +2957,15 @@
                             el._wrapper = wrapAll(content, "<div" + (show ? " hidden" : "") + ">");
                         }
                         hide(content, false);
-                        return toggleHeight(this$1)(el._wrapper, show).then(function() {
+                        return toggleHeight(this$1$1)(el._wrapper, show).then(function() {
                             hide(content, !show);
                             delete el._wrapper;
                             unwrap(content);
                             if (show) {
-                                var toggle = $(this$1.$props.toggle, el);
+                                var toggle = $(this$1$1.$props.toggle, el);
                                 if (!isInView(toggle)) {
                                     scrollIntoView(toggle, {
-                                        offset: this$1.offset
+                                        offset: this$1$1.offset
                                     });
                                 }
                             }
@@ -3001,9 +3004,9 @@
         } ],
         methods: {
             close: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 this.toggleElement(this.$el).then(function() {
-                    return this$1.$destroy(true);
+                    return this$1$1.$destroy(true);
                 });
             }
         }
@@ -3297,17 +3300,17 @@
             name: "show",
             self: true,
             handler: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 active$1 = this;
                 this.tracker.init();
                 once(this.$el, "hide", on(document, pointerDown, function(ref) {
                     var target = ref.target;
-                    return !within(target, this$1.$el) && once(document, pointerUp + " " + pointerCancel + " scroll", function(ref) {
+                    return !within(target, this$1$1.$el) && once(document, pointerUp + " " + pointerCancel + " scroll", function(ref) {
                         var defaultPrevented = ref.defaultPrevented;
                         var type = ref.type;
                         var newTarget = ref.target;
-                        if (!defaultPrevented && type === pointerUp && target === newTarget && !(this$1.target && within(target, this$1.target))) {
-                            this$1.hide(false);
+                        if (!defaultPrevented && type === pointerUp && target === newTarget && !(this$1$1.target && within(target, this$1$1.target))) {
+                            this$1$1.hide(false);
                         }
                     }, true);
                 }), {
@@ -3315,7 +3318,7 @@
                 });
                 once(this.$el, "hide", on(document, "keydown", function(e) {
                     if (e.keyCode === 27) {
-                        this$1.hide(false);
+                        this$1$1.hide(false);
                     }
                 }), {
                     self: true
@@ -3349,7 +3352,7 @@
         },
         methods: {
             show: function(target, delay) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (target === void 0) target = this.target;
                 if (delay === void 0) delay = true;
                 if (this.isToggled() && target && this.target && target !== this.target) {
@@ -3375,18 +3378,18 @@
                     append(this.container, this.$el);
                 }
                 this.showTimer = setTimeout(function() {
-                    return this$1.toggleElement(this$1.$el, true);
+                    return this$1$1.toggleElement(this$1$1.$el, true);
                 }, delay && this.delayShow || 0);
             },
             hide: function(delay) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (delay === void 0) delay = true;
                 var hide = function() {
-                    return this$1.toggleElement(this$1.$el, false, false);
+                    return this$1$1.toggleElement(this$1$1.$el, false, false);
                 };
                 this.clearTimers();
                 this.isDelaying = getPositionedElements(this.$el).some(function(el) {
-                    return this$1.tracker.movesTo(el);
+                    return this$1$1.tracker.movesTo(el);
                 });
                 if (delay && this.isDelaying) {
                     this.hideTimer = setTimeout(this.hide, 50);
@@ -3735,10 +3738,10 @@
             events: [ "resize" ]
         }, {
             write: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 this.elements.forEach(function(el) {
                     var height = toFloat(css(el, "minHeight"));
-                    if (height && (this$1.forceHeight || Math.round(height + boxModelAdjust(el, "height", "content-box")) >= el.offsetHeight)) {
+                    if (height && (this$1$1.forceHeight || Math.round(height + boxModelAdjust(el, "height", "content-box")) >= el.offsetHeight)) {
                         css(el, "height", height);
                     }
                 });
@@ -3912,32 +3915,32 @@
             this.class += " uk-svg";
         },
         connected: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             var assign;
             if (!this.icon && includes(this.src, "#")) {
                 assign = this.src.split("#"), this.src = assign[0], this.icon = assign[1];
             }
             this.svg = this.getSvg().then(function(el) {
-                if (this$1._connected) {
-                    var svg = insertSVG(el, this$1.$el);
-                    if (this$1.svgEl && svg !== this$1.svgEl) {
-                        remove$1(this$1.svgEl);
+                if (this$1$1._connected) {
+                    var svg = insertSVG(el, this$1$1.$el);
+                    if (this$1$1.svgEl && svg !== this$1$1.svgEl) {
+                        remove$1(this$1$1.svgEl);
                     }
-                    this$1.applyAttributes(svg, el);
-                    this$1.$emit();
-                    return this$1.svgEl = svg;
+                    this$1$1.applyAttributes(svg, el);
+                    this$1$1.$emit();
+                    return this$1$1.svgEl = svg;
                 }
             }, noop);
         },
         disconnected: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             this.svg.then(function(svg) {
-                if (!this$1._connected) {
-                    if (isVoidElement(this$1.$el)) {
-                        this$1.$el.hidden = false;
+                if (!this$1$1._connected) {
+                    if (isVoidElement(this$1$1.$el)) {
+                        this$1$1.$el.hidden = false;
                     }
                     remove$1(svg);
-                    this$1.svgEl = null;
+                    this$1$1.svgEl = null;
                 }
             });
             this.svg = null;
@@ -3953,13 +3956,13 @@
         },
         methods: {
             getSvg: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 return loadSVG(this.src).then(function(svg) {
-                    return parseSVG(svg, this$1.icon) || Promise$1.reject("SVG not found.");
+                    return parseSVG(svg, this$1$1.icon) || Promise$1.reject("SVG not found.");
                 });
             },
             applyAttributes: function(el, ref) {
-                var this$1 = this;
+                var this$1$1 = this;
                 for (var prop in this.$options.props) {
                     if (includes(this.include, prop) && prop in this) {
                         attr(el, prop, this[prop]);
@@ -3976,7 +3979,7 @@
                 }
                 var props = [ "width", "height" ];
                 var dimensions = props.map(function(prop) {
-                    return this$1[prop];
+                    return this$1$1[prop];
                 });
                 if (!dimensions.some(function(val) {
                     return val;
@@ -3992,7 +3995,7 @@
                     dimensions = viewBox.split(" ").slice(2);
                 }
                 dimensions.forEach(function(val, i) {
-                    return attr(el, props[i], toFloat(val) * this$1.ratio || null);
+                    return attr(el, props[i], toFloat(val) * this$1$1.ratio || null);
                 });
             }
         }
@@ -4167,9 +4170,9 @@
     var Spinner = {
         extends: IconComponent,
         connected: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             this.svg.then(function(svg) {
-                return svg && this$1.ratio !== 1 && css($("circle", svg), "strokeWidth", 1 / this$1.ratio);
+                return svg && this$1$1.ratio !== 1 && css($("circle", svg), "strokeWidth", 1 / this$1$1.ratio);
             });
         }
     };
@@ -4286,7 +4289,7 @@
         },
         update: {
             read: function(ref) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var image = ref.image;
                 if (!this.observer) {
                     return false;
@@ -4298,7 +4301,7 @@
                     return false;
                 }
                 image && image.then(function(img) {
-                    return img && img.currentSrc !== "" && setSrcAttrs(this$1.$el, currentSrc(img));
+                    return img && img.currentSrc !== "" && setSrcAttrs(this$1$1.$el, currentSrc(img));
                 });
             },
             write: function(data) {
@@ -4314,26 +4317,26 @@
         },
         methods: {
             load: function(entries) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (!entries.some(function(entry) {
                     return isUndefined(entry.isIntersecting) || entry.isIntersecting;
                 })) {
                     return;
                 }
                 this._data.image = getImage(this.dataSrc, this.dataSrcset, this.sizes).then(function(img) {
-                    setSrcAttrs(this$1.$el, currentSrc(img), img.srcset, img.sizes);
-                    storage[this$1.cacheKey] = currentSrc(img);
+                    setSrcAttrs(this$1$1.$el, currentSrc(img), img.srcset, img.sizes);
+                    storage[this$1$1.cacheKey] = currentSrc(img);
                     return img;
                 }, function(e) {
-                    return trigger(this$1.$el, new e.constructor(e.type, e));
+                    return trigger(this$1$1.$el, new e.constructor(e.type, e));
                 });
                 this.observer.disconnect();
             },
             observe: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (this._connected && !this._data.image) {
                     this.target.forEach(function(el) {
-                        return this$1.observer.observe(el);
+                        return this$1$1.observer.observe(el);
                     });
                 }
             }
@@ -4530,11 +4533,12 @@
         }, {
             name: "toggle",
             self: true,
-            handler: function(e) {
+            handler: function(e, toggle) {
                 if (e.defaultPrevented) {
                     return;
                 }
                 e.preventDefault();
+                this.target = toggle.$el;
                 if (this.isToggled() === includes(active, this)) {
                     this.toggle();
                 }
@@ -4559,7 +4563,7 @@
             name: "show",
             self: true,
             handler: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 var docEl = document.documentElement;
                 if (width(window) > docEl.clientWidth && this.overlay) {
                     css(document.body, "overflowY", "scroll");
@@ -4571,7 +4575,7 @@
                 if (this.bgClose) {
                     once(this.$el, "hide", on(document, pointerDown, function(ref) {
                         var target = ref.target;
-                        if (last(active) !== this$1 || this$1.overlay && !within(target, this$1.$el) || within(target, this$1.panel)) {
+                        if (last(active) !== this$1$1 || this$1$1.overlay && !within(target, this$1$1.$el) || within(target, this$1$1.panel)) {
                             return;
                         }
                         once(document, pointerUp + " " + pointerCancel + " scroll", function(ref) {
@@ -4579,7 +4583,7 @@
                             var type = ref.type;
                             var newTarget = ref.target;
                             if (!defaultPrevented && type === pointerUp && target === newTarget) {
-                                this$1.hide();
+                                this$1$1.hide();
                             }
                         }, true);
                     }), {
@@ -4588,8 +4592,8 @@
                 }
                 if (this.escClose) {
                     once(this.$el, "hide", on(document, "keydown", function(e) {
-                        if (e.keyCode === 27 && last(active) === this$1) {
-                            this$1.hide();
+                        if (e.keyCode === 27 && last(active) === this$1$1) {
+                            this$1$1.hide();
                         }
                     }), {
                         self: true
@@ -4597,10 +4601,30 @@
                 }
             }
         }, {
+            name: "shown",
+            self: true,
+            handler: function() {
+                if (!isFocusable(this.$el)) {
+                    attr(this.$el, "tabindex", "0");
+                }
+                if (!$(":focus", this.$el)) {
+                    this.$el.focus();
+                }
+            }
+        }, {
+            name: "hide",
+            self: true,
+            handler: function() {
+                if (isFocusable(this.target)) {
+                    this.target.focus();
+                    this.target = null;
+                }
+            }
+        }, {
             name: "hidden",
             self: true,
             handler: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (includes(active, this)) {
                     active.splice(active.indexOf(this), 1);
                 }
@@ -4609,7 +4633,7 @@
                 }
                 css(this.$el, "zIndex", "");
                 if (!active.some(function(modal) {
-                    return modal.clsPage === this$1.clsPage;
+                    return modal.clsPage === this$1$1.clsPage;
                 })) {
                     removeClass(document.documentElement, this.clsPage);
                 }
@@ -4620,12 +4644,12 @@
                 return this.isToggled() ? this.hide() : this.show();
             },
             show: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (this.container && parent(this.$el) !== this.container) {
                     append(this.container, this.$el);
                     return new Promise$1(function(resolve) {
                         return requestAnimationFrame(function() {
-                            return this$1.show().then(resolve);
+                            return this$1$1.show().then(resolve);
                         });
                     });
                 }
@@ -4835,19 +4859,23 @@
             },
             dropdowns: {
                 get: function(ref, $el) {
+                    var this$1$1 = this;
                     var clsDrop = ref.clsDrop;
                     var dropdowns = $$("." + clsDrop, $el);
-                    if (this.container !== $el) {
-                        $$("." + clsDrop, this.container).forEach(function(el) {
-                            return !includes(dropdowns, el) && dropdowns.push(el);
+                    if (this.dropContainer !== $el) {
+                        $$("." + clsDrop, this.dropContainer).forEach(function(el) {
+                            var dropdown = this$1$1.getDropdown(el);
+                            if (!includes(dropdowns, el) && dropdown && dropdown.target && within(dropdown.target, this$1$1.$el)) {
+                                dropdowns.push(el);
+                            }
                         });
                     }
                     return dropdowns;
                 },
                 watch: function(dropdowns) {
-                    var this$1 = this;
+                    var this$1$1 = this;
                     this.$create("drop", dropdowns.filter(function(el) {
-                        return !this$1.getDropdown(el);
+                        return !this$1$1.getDropdown(el);
                     }), assign({}, this.$props, {
                         boundary: this.boundary,
                         pos: this.pos,
@@ -4855,6 +4883,10 @@
                     }));
                 },
                 immediate: true
+            },
+            toggles: function(ref, $el) {
+                var dropdown = ref.dropdown;
+                return $$(dropdown, $el);
             }
         },
         disconnected: function() {
@@ -4862,25 +4894,87 @@
             delete this._dropbar;
         },
         events: [ {
-            name: "mouseover",
+            name: "mouseover focusin",
             delegate: function() {
                 return this.dropdown;
             },
             handler: function(ref) {
                 var current = ref.current;
                 var active = this.getActive();
-                if (active && active.target && !within(active.target, current) && !active.tracker.movesTo(active.$el)) {
+                if (active && includes(active.mode, "hover") && active.target && !within(active.target, current) && !active.tracker.movesTo(active.$el)) {
                     active.hide(false);
                 }
+            }
+        }, {
+            name: "keydown",
+            delegate: function() {
+                return this.dropdown;
+            },
+            handler: function(e) {
+                var current = e.current;
+                var keyCode = e.keyCode;
+                var active = this.getActive();
+                if (keyCode === keyMap.DOWN && hasAttr(current, "aria-expanded")) {
+                    e.preventDefault();
+                    if (!active || active.target !== current) {
+                        current.click();
+                        once(this.dropContainer, "show", function(ref) {
+                            var target = ref.target;
+                            return focusFirstFocusableElement(target);
+                        });
+                    } else {
+                        focusFirstFocusableElement(active.$el);
+                    }
+                }
+                handleNavItemNavigation(e, this.toggles, active);
+            }
+        }, {
+            name: "keydown",
+            el: function() {
+                return this.dropContainer;
+            },
+            delegate: function() {
+                return "." + this.clsDrop;
+            },
+            handler: function(e) {
+                var current = e.current;
+                var keyCode = e.keyCode;
+                if (!includes(this.dropdowns, current)) {
+                    return;
+                }
+                var active = this.getActive();
+                var elements = $$(selFocusable, current);
+                var i = findIndex(elements, function(el) {
+                    return matches(el, ":focus");
+                });
+                if (keyCode === keyMap.UP) {
+                    e.preventDefault();
+                    if (i > 0) {
+                        elements[i - 1].focus();
+                    }
+                }
+                if (keyCode === keyMap.DOWN) {
+                    e.preventDefault();
+                    if (i < elements.length - 1) {
+                        elements[i + 1].focus();
+                    }
+                }
+                if (keyCode === keyMap.ESC) {
+                    active && active.target && active.target.focus();
+                }
+                handleNavItemNavigation(e, this.toggles, active);
             }
         }, {
             name: "mouseleave",
             el: function() {
                 return this.dropbar;
             },
+            filter: function() {
+                return this.dropbar;
+            },
             handler: function() {
                 var active = this.getActive();
-                if (active && !this.dropdowns.some(function(el) {
+                if (active && includes(active.mode, "hover") && !this.dropdowns.some(function(el) {
                     return matches(el, ":hover");
                 })) {
                     active.hide();
@@ -4957,10 +5051,10 @@
         } ],
         methods: {
             getActive: function() {
-                return active$1 && includes(active$1.mode, "hover") && within(active$1.target, this.$el) && active$1;
+                return active$1 && within(active$1.target, this.$el) && active$1;
             },
             transitionTo: function(newHeight, el) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var ref = this;
                 var dropbar = ref.dropbar;
                 var oldHeight = isVisible(dropbar) ? height(dropbar) : 0;
@@ -4976,13 +5070,47 @@
                     css(el, {
                         clip: ""
                     });
-                    this$1.$update(dropbar);
+                    this$1$1.$update(dropbar);
                 });
             },
             getDropdown: function(el) {
                 return this.$getComponent(el, "drop") || this.$getComponent(el, "dropdown");
             }
         }
+    };
+    function handleNavItemNavigation(e, toggles, active) {
+        var current = e.current;
+        var keyCode = e.keyCode;
+        var target = active && active.target || current;
+        var i = toggles.indexOf(target);
+        if (keyCode === keyMap.LEFT && i > 0) {
+            active && active.hide(false);
+            toggles[i - 1].focus();
+        }
+        if (keyCode === keyMap.RIGHT && i < toggles.length - 1) {
+            active && active.hide(false);
+            toggles[i + 1].focus();
+        }
+        if (keyCode === keyMap.TAB) {
+            target.focus();
+            active && active.hide(false);
+        }
+    }
+    function focusFirstFocusableElement(el) {
+        if (!$(":focus", el)) {
+            var focusEl = $(selFocusable, el);
+            if (focusEl) {
+                focusEl.focus();
+            }
+        }
+    }
+    var keyMap = {
+        TAB: 9,
+        ESC: 27,
+        LEFT: 37,
+        UP: 38,
+        RIGHT: 39,
+        DOWN: 40
     };
     var offcanvas = {
         mixins: [ Modal ],
@@ -5233,13 +5361,13 @@
         },
         methods: {
             scrollTo: function(el) {
-                var this$1 = this;
+                var this$1$1 = this;
                 el = el && $(el) || document.body;
                 if (trigger(this.$el, "beforescroll", [ this, el ])) {
                     scrollIntoView(el, {
                         offset: this.offset
                     }).then(function() {
-                        return trigger(this$1.$el, "scrolled", [ this$1, el ]);
+                        return trigger(this$1$1.$el, "scrolled", [ this$1$1, el ]);
                     });
                 }
             }
@@ -5293,18 +5421,18 @@
             }
         },
         disconnected: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             this.elements.forEach(function(el) {
-                removeClass(el, this$1.inViewClass, el[stateKey] ? el[stateKey].cls : "");
+                removeClass(el, this$1$1.inViewClass, el[stateKey] ? el[stateKey].cls : "");
                 delete el[stateKey];
             });
         },
         update: [ {
             read: function(data$1) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (!data$1.update) {
                     Promise$1.resolve().then(function() {
-                        this$1.$emit();
+                        this$1$1.$emit();
                         data$1.update = true;
                     });
                     return false;
@@ -5312,31 +5440,31 @@
                 this.elements.forEach(function(el) {
                     if (!el[stateKey]) {
                         el[stateKey] = {
-                            cls: data(el, "uk-scrollspy-class") || this$1.cls
+                            cls: data(el, "uk-scrollspy-class") || this$1$1.cls
                         };
                     }
-                    el[stateKey].show = isInView(el, this$1.offsetTop, this$1.offsetLeft);
+                    el[stateKey].show = isInView(el, this$1$1.offsetTop, this$1$1.offsetLeft);
                 });
             },
             write: function(data) {
-                var this$1 = this;
+                var this$1$1 = this;
                 this.elements.forEach(function(el) {
                     var state = el[stateKey];
                     if (state.show && !state.inview && !state.queued) {
                         state.queued = true;
                         data.promise = (data.promise || Promise$1.resolve()).then(function() {
                             return new Promise$1(function(resolve) {
-                                return setTimeout(resolve, this$1.delay);
+                                return setTimeout(resolve, this$1$1.delay);
                             });
                         }).then(function() {
-                            this$1.toggle(el, true);
+                            this$1$1.toggle(el, true);
                             setTimeout(function() {
                                 state.queued = false;
-                                this$1.$emit();
+                                this$1$1.$emit();
                             }, 300);
                         });
-                    } else if (!state.show && state.inview && !state.queued && this$1.repeat) {
-                        this$1.toggle(el, false);
+                    } else if (!state.show && state.inview && !state.queued && this$1$1.repeat) {
+                        this$1$1.toggle(el, false);
                     }
                 });
             },
@@ -5403,7 +5531,7 @@
         },
         update: [ {
             read: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 var ref = this.targets;
                 var length = ref.length;
                 if (!length || !isVisible(this.$el)) {
@@ -5419,7 +5547,7 @@
                     active = length - 1;
                 } else {
                     this.targets.every(function(el, i) {
-                        if (offset(el).top - offset(getViewport$1(scrollElement)).top - this$1.offset <= 0) {
+                        if (offset(el).top - offset(getViewport$1(scrollElement)).top - this$1$1.offset <= 0) {
                             active = i;
                             return true;
                         }
@@ -5525,7 +5653,7 @@
                 return window;
             },
             handler: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (!(this.targetOffset !== false && location.hash && window.pageYOffset > 0)) {
                     return;
                 }
@@ -5534,10 +5662,10 @@
                     fastdom.read(function() {
                         var ref = offset(target);
                         var top = ref.top;
-                        var elTop = offset(this$1.$el).top;
-                        var elHeight = this$1.$el.offsetHeight;
-                        if (this$1.isFixed && elTop + elHeight >= top && elTop <= top + target.offsetHeight) {
-                            scrollTop(window, top - elHeight - (isNumeric(this$1.targetOffset) ? this$1.targetOffset : 0) - this$1.offset);
+                        var elTop = offset(this$1$1.$el).top;
+                        var elHeight = this$1$1.$el.offsetHeight;
+                        if (this$1$1.isFixed && elTop + elHeight >= top && elTop <= top + target.offsetHeight) {
+                            scrollTop(window, top - elHeight - (isNumeric(this$1$1.targetOffset) ? this$1$1.targetOffset : 0) - this$1$1.offset);
                         }
                     });
                 }
@@ -5594,7 +5722,7 @@
                 };
             },
             write: function(data, types) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var now = Date.now();
                 var isScrollUpdate = types.has("scroll");
                 var initTimestamp = data.initTimestamp;
@@ -5628,7 +5756,7 @@
                     if (this.animation && scroll > this.topOffset) {
                         Animation.cancel(this.$el);
                         Animation.out(this.$el, this.animation).then(function() {
-                            return this$1.hide();
+                            return this$1$1.hide();
                         }, noop);
                     } else {
                         this.hide();
@@ -5698,12 +5826,14 @@
         props: {
             connect: String,
             toggle: String,
+            itemNav: String,
             active: Number,
             swiping: Boolean
         },
         data: {
             connect: "~.uk-switcher",
             toggle: "> * > :first-child",
+            itemNav: false,
             active: 0,
             swiping: true,
             cls: "uk-active",
@@ -5716,14 +5846,14 @@
                     return queryAll(connect, $el);
                 },
                 watch: function(connects) {
-                    var this$1 = this;
+                    var this$1$1 = this;
                     if (this.swiping) {
                         css(connects, "touch-action", "pan-y pinch-zoom");
                     }
                     var index = this.index();
                     this.connects.forEach(function(el) {
                         return children(el).forEach(function(child, i) {
-                            return toggleClass(child, this$1.cls, i === index);
+                            return toggleClass(child, this$1$1.cls, i === index);
                         });
                     });
                 },
@@ -5743,9 +5873,9 @@
                 immediate: true
             },
             children: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 return children(this.$el).filter(function(child) {
-                    return this$1.toggles.some(function(toggle) {
+                    return this$1$1.toggles.some(function(toggle) {
                         return within(toggle, child);
                     });
                 });
@@ -5763,7 +5893,7 @@
         }, {
             name: "click",
             el: function() {
-                return this.connects;
+                return this.connects.concat(this.itemNav ? queryAll(this.itemNav, this.$el) : []);
             },
             delegate: function() {
                 return "[" + this.attrItem + "],[data-" + this.attrItem + "]";
@@ -5787,28 +5917,28 @@
         } ],
         methods: {
             index: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 return findIndex(this.children, function(el) {
-                    return hasClass(el, this$1.cls);
+                    return hasClass(el, this$1$1.cls);
                 });
             },
             show: function(item) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var prev = this.index();
                 var next = getIndex(this.children[getIndex(item, this.toggles, prev)], children(this.$el));
                 if (prev === next) {
                     return;
                 }
                 this.children.forEach(function(child, i) {
-                    toggleClass(child, this$1.cls, next === i);
-                    attr(this$1.toggles[i], "aria-expanded", next === i);
+                    toggleClass(child, this$1$1.cls, next === i);
+                    attr(this$1$1.toggles[i], "aria-expanded", next === i);
                 });
                 this.connects.forEach(function(ref) {
                     var children = ref.children;
-                    return this$1.toggleElement(toNodes(children).filter(function(child) {
-                        return hasClass(child, this$1.cls);
+                    return this$1$1.toggleElement(toNodes(children).filter(function(child) {
+                        return hasClass(child, this$1$1.cls);
                     }), false, prev >= 0).then(function() {
-                        return this$1.toggleElement(children[next], true, prev >= 0);
+                        return this$1$1.toggleElement(children[next], true, prev >= 0);
                     });
                 });
             }
@@ -5884,11 +6014,22 @@
             },
             handler: function(e) {
                 if (!isTouch(e) && !this._isTouch) {
-                    var isPointerEvent = includes([ "pointerleave", "pointerenter" ], e.type);
-                    if (!isPointerEvent && matches(this.$el, ":hover") || isPointerEvent && matches(this.$el, ":focus")) {
+                    var show = includes([ pointerEnter, "focus" ], e.type);
+                    if (e.type === "blur" && matches(this.$el, ":hover") || e.type === pointerLeave && matches(this.$el, ":focus") || show && attr(this.$el, "aria-expanded") === "true") {
                         return;
                     }
-                    this.toggle("toggle" + (includes([ pointerEnter, "focus" ], e.type) ? "show" : "hide"));
+                    this.toggle("toggle" + (show ? "show" : "hide"));
+                }
+            }
+        }, {
+            name: "keydown",
+            filter: function() {
+                return includes(this.mode, "click");
+            },
+            handler: function(e) {
+                if (e.keyCode === 32) {
+                    e.preventDefault();
+                    this.$el.click();
                 }
             }
         }, {
@@ -5898,7 +6039,7 @@
             },
             handler: function(e) {
                 var link;
-                if (closest(e.target, 'a[href="#"], a[href=""]') || (link = closest(e.target, "a[href]")) && (!attr(this.$el, "aria-expanded") || link.hash && matches(this.target, link.hash))) {
+                if (closest(e.target, 'a[href="#"], a[href=""]') || (link = closest(e.target, "a[href]")) && (attr(this.$el, "aria-expanded") !== "true" || link.hash && matches(this.target, link.hash))) {
                     e.preventDefault();
                 }
                 this.toggle();
@@ -5910,7 +6051,9 @@
                 return this.target;
             },
             handler: function(e, toggled) {
-                this.updateAria(toggled);
+                if (e.target === this.target[0]) {
+                    this.updateAria(toggled);
+                }
             }
         } ],
         update: {
@@ -5930,7 +6073,7 @@
         },
         methods: {
             toggle: function(type) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (!trigger(this.target, type || "toggle", [ this ])) {
                     return;
                 }
@@ -5938,24 +6081,24 @@
                     return this.toggleElement(this.target);
                 }
                 var leaving = this.target.filter(function(el) {
-                    return hasClass(el, this$1.clsLeave);
+                    return hasClass(el, this$1$1.clsLeave);
                 });
                 if (leaving.length) {
                     this.target.forEach(function(el) {
                         var isLeaving = includes(leaving, el);
-                        this$1.toggleElement(el, isLeaving, isLeaving);
+                        this$1$1.toggleElement(el, isLeaving, isLeaving);
                     });
                     return;
                 }
                 var toggled = this.target.filter(this.isToggled);
                 this.toggleElement(toggled, false).then(function() {
-                    return this$1.toggleElement(this$1.target.filter(function(el) {
+                    return this$1$1.toggleElement(this$1$1.target.filter(function(el) {
                         return !includes(toggled, el);
                     }), true);
                 });
             },
             updateAria: function(toggled) {
-                attr(this.$el, "aria-expanded", isBoolean(toggled) ? toggled : this.cls ? hasClass(this.target[0], this.cls.split(" ")[0]) : isVisible(this.target[0]));
+                attr(this.$el, "aria-expanded", isBoolean(toggled) ? toggled : this.isToggled(this.target));
             }
         }
     };
@@ -6039,9 +6182,9 @@
                 return $(clsWrapper.replace("%unit%", "seconds"), $el);
             },
             units: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 return [ "days", "hours", "minutes", "seconds" ].filter(function(unit) {
-                    return this$1[unit];
+                    return this$1$1[unit];
                 });
             }
         },
@@ -6049,10 +6192,10 @@
             this.start();
         },
         disconnected: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             this.stop();
             this.units.forEach(function(unit) {
-                return empty(this$1[unit]);
+                return empty(this$1$1[unit]);
             });
         },
         events: [ {
@@ -6070,7 +6213,7 @@
         } ],
         update: {
             write: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 var timespan = getTimeSpan(this.date);
                 if (timespan.total <= 0) {
                     this.stop();
@@ -6079,7 +6222,7 @@
                 this.units.forEach(function(unit) {
                     var digits = String(Math.floor(timespan[unit]));
                     digits = digits.length < 2 ? "0" + digits : digits;
-                    var el = this$1[unit];
+                    var el = this$1$1[unit];
                     if (el.textContent !== digits) {
                         digits = digits.split("");
                         if (digits.length !== el.children.length) {
@@ -6344,7 +6487,7 @@
         },
         methods: {
             animate: function(action, target) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (target === void 0) target = this.$el;
                 var name = this.animation;
                 var animationFn = name === "fade" ? fade : name === "delayed-fade" ? function() {
@@ -6356,7 +6499,7 @@
                     return Promise$1.resolve();
                 } : slide;
                 return animationFn(action, target, this.duration).then(function() {
-                    return this$1.$update(target, "resize");
+                    return this$1$1.$update(target, "resize");
                 }, noop);
             }
         }
@@ -6382,12 +6525,12 @@
                     return $$("[" + attrItem + "],[data-" + attrItem + "]", $el);
                 },
                 watch: function() {
-                    var this$1 = this;
+                    var this$1$1 = this;
                     this.updateState();
                     if (this.selActive !== false) {
                         var actives = $$(this.selActive, this.$el);
                         this.toggles.forEach(function(el) {
-                            return toggleClass(el, this$1.cls, includes(actives, el));
+                            return toggleClass(el, this$1$1.cls, includes(actives, el));
                         });
                     }
                 },
@@ -6425,11 +6568,11 @@
                 }
             },
             getState: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 return this.toggles.filter(function(item) {
-                    return hasClass(item, this$1.cls);
+                    return hasClass(item, this$1$1.cls);
                 }).reduce(function(state, el) {
-                    return mergeState(el, this$1.attrItem, state);
+                    return mergeState(el, this$1$1.attrItem, state);
                 }, {
                     filter: {
                         "": ""
@@ -6438,7 +6581,7 @@
                 });
             },
             setState: function(state, animate) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (animate === void 0) animate = true;
                 state = assign({
                     filter: {
@@ -6448,22 +6591,22 @@
                 }, state);
                 trigger(this.$el, "beforeFilter", [ this, state ]);
                 this.toggles.forEach(function(el) {
-                    return toggleClass(el, this$1.cls, !!matchFilter(el, this$1.attrItem, state));
+                    return toggleClass(el, this$1$1.cls, !!matchFilter(el, this$1$1.attrItem, state));
                 });
                 Promise$1.all($$(this.target, this.$el).map(function(target) {
                     var filterFn = function() {
                         applyState(state, target, children(target));
-                        this$1.$update(this$1.$el);
+                        this$1$1.$update(this$1$1.$el);
                     };
-                    return animate ? this$1.animate(filterFn, target) : filterFn();
+                    return animate ? this$1$1.animate(filterFn, target) : filterFn();
                 })).then(function() {
-                    return trigger(this$1.$el, "afterFilter", [ this$1 ]);
+                    return trigger(this$1$1.$el, "afterFilter", [ this$1$1 ]);
                 });
             },
             updateState: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 fastdom.write(function() {
-                    return this$1.setState(this$1.getState(), false);
+                    return this$1$1.setState(this$1$1.getState(), false);
                 });
             }
         }
@@ -6649,7 +6792,7 @@
         return {
             dir: dir,
             show: function(duration, percent, linear) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (percent === void 0) percent = 0;
                 var timing = linear ? "linear" : easing;
                 duration -= Math.round(duration * clamp(percent, -1, 1));
@@ -6667,7 +6810,7 @@
                     dir: dir
                 });
                 Promise$1.all([ Transition.start(next, props[1], duration, timing), Transition.start(prev, props[0], duration, timing) ]).then(function() {
-                    this$1.reset();
+                    this$1$1.reset();
                     deferred.resolve();
                 }, noop);
                 return deferred.promise;
@@ -6748,10 +6891,10 @@
         } ],
         methods: {
             startAutoplay: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 this.stopAutoplay();
                 this.interval = setInterval(function() {
-                    return (!this$1.draggable || !$(":focus", this$1.$el)) && (!this$1.pauseOnHover || !matches(this$1.$el, ":hover")) && !this$1.stack.length && this$1.show("next");
+                    return (!this$1$1.draggable || !$(":focus", this$1$1.$el)) && (!this$1$1.pauseOnHover || !matches(this$1$1.$el, ":hover")) && !this$1$1.stack.length && this$1$1.show("next");
                 }, this.autoplayInterval);
             },
             stopAutoplay: function() {
@@ -6768,13 +6911,13 @@
             threshold: 10
         },
         created: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             [ "start", "move", "end" ].forEach(function(key) {
-                var fn = this$1[key];
-                this$1[key] = function(e) {
+                var fn = this$1$1[key];
+                this$1$1[key] = function(e) {
                     var pos = getEventPos(e).x * (isRtl ? -1 : 1);
-                    this$1.prevPos = pos !== this$1.pos ? this$1.pos : this$1.prevPos;
-                    this$1.pos = pos;
+                    this$1$1.prevPos = pos !== this$1$1.pos ? this$1$1.pos : this$1$1.prevPos;
+                    this$1$1.pos = pos;
                     fn(e);
                 };
             });
@@ -6816,7 +6959,7 @@
                 css(this.list, "userSelect", "none");
             },
             move: function(e) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var distance = this.pos - this.drag;
                 if (distance === 0 || this.prevPos === this.pos || !this.dragging && Math.abs(distance) < this.threshold) {
                     return;
@@ -6848,10 +6991,10 @@
                 [ this.index, this.prevIndex ].filter(function(i) {
                     return !includes([ nextIndex, prevIndex ], i);
                 }).forEach(function(i) {
-                    trigger(slides[i], "itemhidden", [ this$1 ]);
+                    trigger(slides[i], "itemhidden", [ this$1$1 ]);
                     if (edge) {
                         itemShown = true;
-                        this$1.prevIndex = prevIndex;
+                        this$1$1.prevIndex = prevIndex;
                     }
                 });
                 if (this.index === prevIndex && this.prevIndex !== prevIndex || itemShown) {
@@ -6920,14 +7063,14 @@
         },
         update: {
             write: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (this.nav && this.length !== this.nav.children.length) {
                     html(this.nav, this.slides.map(function(_, i) {
-                        return "<li " + this$1.attrItem + '="' + i + '"><a href></a></li>';
+                        return "<li " + this$1$1.attrItem + '="' + i + '"><a href></a></li>';
                     }).join(""));
                 }
                 this.navItems.concat(this.nav).forEach(function(el) {
-                    return el && (el.hidden = !this$1.maxIndex);
+                    return el && (el.hidden = !this$1$1.maxIndex);
                 });
                 this.updateNav();
             },
@@ -6948,12 +7091,12 @@
         } ],
         methods: {
             updateNav: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 var i = this.getValidIndex();
                 this.navItems.forEach(function(el) {
-                    var cmd = data(el, this$1.attrItem);
-                    toggleClass(el, this$1.clsActive, toNumber(cmd) === i);
-                    toggleClass(el, "uk-invisible", this$1.finite && (cmd === "previous" && i === 0 || cmd === "next" && i >= this$1.maxIndex));
+                    var cmd = data(el, this$1$1.attrItem);
+                    toggleClass(el, this$1$1.clsActive, toNumber(cmd) === i);
+                    toggleClass(el, "uk-invisible", this$1$1.finite && (cmd === "previous" && i === 0 || cmd === "next" && i >= this$1$1.maxIndex));
                 });
             }
         }
@@ -7027,7 +7170,7 @@
         },
         methods: {
             show: function(index, force) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (force === void 0) force = false;
                 if (this.dragging || !this.length) {
                     return;
@@ -7038,7 +7181,7 @@
                 var reset = function() {
                     stack.splice(queueIndex, 1);
                     if (stack.length) {
-                        this$1.show(stack.shift(), true);
+                        this$1$1.show(stack.shift(), true);
                     }
                 };
                 stack[force ? "unshift" : "push"](index);
@@ -7065,15 +7208,15 @@
                     return;
                 }
                 var promise = this._show(prev, next, force).then(function() {
-                    prev && trigger(prev, "itemhidden", [ this$1 ]);
-                    trigger(next, "itemshown", [ this$1 ]);
+                    prev && trigger(prev, "itemhidden", [ this$1$1 ]);
+                    trigger(next, "itemshown", [ this$1$1 ]);
                     return new Promise$1(function(resolve) {
                         fastdom.write(function() {
                             stack.shift();
                             if (stack.length) {
-                                this$1.show(stack.shift(), true);
+                                this$1$1.show(stack.shift(), true);
                             } else {
-                                this$1._transitioner = null;
+                                this$1$1._transitioner = null;
                             }
                             resolve();
                         });
@@ -7298,7 +7441,7 @@
         }, {
             name: "itemload",
             handler: function(_, item) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var src = item.source;
                 var type = item.type;
                 var alt = item.alt;
@@ -7323,14 +7466,14 @@
                     getImage(src, attrs.srcset, attrs.size).then(function(ref) {
                         var width = ref.width;
                         var height = ref.height;
-                        return this$1.setItem(item, createEl("img", assign({
+                        return this$1$1.setItem(item, createEl("img", assign({
                             src: src,
                             width: width,
                             height: height,
                             alt: alt
                         }, attrs)));
                     }, function() {
-                        return this$1.setError(item);
+                        return this$1$1.setError(item);
                     });
                 } else if (type === "video" || src.match(/\.(mp4|webm|ogv)($|\?)/i)) {
                     var video = createEl("video", assign({
@@ -7345,10 +7488,10 @@
                             width: video.videoWidth,
                             height: video.videoHeight
                         });
-                        this$1.setItem(item, video);
+                        this$1$1.setItem(item, video);
                     });
                     on(video, "error", function() {
-                        return this$1.setError(item);
+                        return this$1$1.setError(item);
                     });
                 } else if (type === "iframe" || src.match(/\.(html|php)($|\?)/i)) {
                     this.setItem(item, createEl("iframe", assign({
@@ -7371,13 +7514,13 @@
                         var ref_response = ref.response;
                         var height = ref_response.height;
                         var width = ref_response.width;
-                        return this$1.setItem(item, createEl("iframe", assign({
+                        return this$1$1.setItem(item, createEl("iframe", assign({
                             src: "https://player.vimeo.com/video/" + matches[1] + (matches[2] ? "?" + matches[2] : ""),
                             width: width,
                             height: height
                         }, iframeAttrs, attrs)));
                     }, function() {
-                        return this$1.setError(item);
+                        return this$1$1.setError(item);
                     });
                 }
             }
@@ -7452,7 +7595,7 @@
         } ],
         methods: {
             show: function(index) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var items = uniqueBy(this.toggles.map(toItem), "source");
                 if (isElement(index)) {
                     var ref = toItem(index);
@@ -7466,7 +7609,7 @@
                     items: items
                 }));
                 on(this.panel.$el, "hidden", function() {
-                    return this$1.panel = false;
+                    return this$1$1.panel = false;
                 });
                 return this.panel.show(index);
             },
@@ -7522,14 +7665,14 @@
             this.$mount(append(container, '<div class="' + this.clsMsg + (this.status ? " " + this.clsMsg + "-" + this.status : "") + '"> <a href class="' + this.clsClose + '" data-uk-close></a> <div>' + this.message + "</div> </div>"));
         },
         connected: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             var obj;
             var margin = toFloat(css(this.$el, this.marginProp));
             Transition.start(css(this.$el, this.startProps), (obj = {
                 opacity: 1
             }, obj[this.marginProp] = margin, obj)).then(function() {
-                if (this$1.timeout) {
-                    this$1.timer = setTimeout(this$1.close, this$1.timeout);
+                if (this$1$1.timeout) {
+                    this$1$1.timer = setTimeout(this$1$1.close, this$1$1.timeout);
                 }
             });
         },
@@ -7551,10 +7694,10 @@
         }, obj$1),
         methods: {
             close: function(immediate) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var removeFn = function(el) {
                     var container = parent(el);
-                    trigger(el, "close", [ this$1 ]);
+                    trigger(el, "close", [ this$1$1 ]);
                     remove$1(el);
                     if (container && !container.hasChildNodes()) {
                         remove$1(container);
@@ -7594,7 +7737,7 @@
         }, {}),
         computed: {
             props: function(properties, $el) {
-                var this$1 = this;
+                var this$1$1 = this;
                 return props.reduce(function(props, prop) {
                     if (isUndefined(properties[prop])) {
                         return props;
@@ -7620,11 +7763,11 @@
                     } else if (startsWith(prop, "bg")) {
                         var attr = prop === "bgy" ? "height" : "width";
                         steps = steps.map(function(step) {
-                            return toPx(step, attr, this$1.$el);
+                            return toPx(step, attr, this$1$1.$el);
                         });
                         css($el, "background-position-" + prop[2], "");
                         bgPos = css($el, "backgroundPosition").split(" ")[prop[2] === "x" ? 0 : 1];
-                        if (this$1.covers) {
+                        if (this$1$1.covers) {
                             var min = Math.min.apply(Math, steps);
                             var max = Math.max.apply(Math, steps);
                             var down = steps.indexOf(min) < steps.indexOf(max);
@@ -7645,7 +7788,7 @@
                         })) {
                             return props;
                         }
-                        var length = getMaxPathLength(this$1.$el);
+                        var length = getMaxPathLength(this$1$1.$el);
                         css($el, "strokeDasharray", length);
                         if (unit === "%") {
                             steps = steps.map(function(step) {
@@ -7666,9 +7809,9 @@
                 }, {});
             },
             bgProps: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 return [ "bgx", "bgy" ].filter(function(bg) {
-                    return bg in this$1.props;
+                    return bg in this$1$1.props;
                 });
             },
             covers: function(_, $el) {
@@ -7680,7 +7823,7 @@
         },
         update: {
             read: function(data) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (!this.matchMedia) {
                     return;
                 }
@@ -7692,7 +7835,7 @@
                         data.image = img;
                         if (!img.naturalWidth) {
                             img.onload = function() {
-                                return this$1.$update();
+                                return this$1$1.$update();
                             };
                         }
                     }
@@ -7711,7 +7854,7 @@
                 };
                 var dim = Dimensions.cover(dimImage, dimEl);
                 this.bgProps.forEach(function(prop) {
-                    var ref = this$1.props[prop];
+                    var ref = this$1$1.props[prop];
                     var diff = ref.diff;
                     var bgPos = ref.bgPos;
                     var steps = ref.steps;
@@ -7720,9 +7863,9 @@
                     if (span < diff) {
                         dimEl[attr] = dim[attr] + diff - span;
                     } else if (span > diff) {
-                        var posPercentage = dimEl[attr] / toPx(bgPos, attr, this$1.$el);
+                        var posPercentage = dimEl[attr] / toPx(bgPos, attr, this$1$1.$el);
                         if (posPercentage) {
-                            this$1.props[prop].steps = steps.map(function(step) {
+                            this$1$1.props[prop].steps = steps.map(function(step) {
                                 return step - (span - diff) / posPercentage;
                             });
                         }
@@ -7749,9 +7892,9 @@
         },
         methods: {
             reset: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 each(this.getCss(0), function(_, prop) {
-                    return css(this$1.$el, prop, "");
+                    return css(this$1$1.$el, prop, "");
                 });
             },
             getCss: function(percent) {
@@ -8086,7 +8229,7 @@
                 return ~index ? index : this.length - 1;
             },
             sets: function(ref) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var sets = ref.sets;
                 if (!sets) {
                     return;
@@ -8099,17 +8242,17 @@
                     var slideWidth = dimensions(slide).width;
                     var slideRight = slideLeft + slideWidth;
                     if (slideRight > left) {
-                        if (!this$1.center && i > this$1.maxIndex) {
-                            i = this$1.maxIndex;
+                        if (!this$1$1.center && i > this$1$1.maxIndex) {
+                            i = this$1$1.maxIndex;
                         }
                         if (!includes(sets, i)) {
-                            var cmp = this$1.slides[i + 1];
-                            if (this$1.center && cmp && slideWidth < leftCenter - dimensions(cmp).width / 2) {
+                            var cmp = this$1$1.slides[i + 1];
+                            if (this$1$1.center && cmp && slideWidth < leftCenter - dimensions(cmp).width / 2) {
                                 leftCenter -= slideWidth;
                             } else {
                                 leftCenter = width;
                                 sets.push(i);
-                                left = slideLeft + width + (this$1.center ? slideWidth / 2 : 0);
+                                left = slideLeft + width + (this$1$1.center ? slideWidth / 2 : 0);
                             }
                         }
                     }
@@ -8130,11 +8273,11 @@
         },
         update: {
             write: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 this.navItems.forEach(function(el) {
-                    var index = toNumber(data(el, this$1.attrItem));
+                    var index = toNumber(data(el, this$1$1.attrItem));
                     if (index !== false) {
-                        el.hidden = !this$1.maxIndex || index > this$1.maxIndex || this$1.sets && !includes(this$1.sets, index);
+                        el.hidden = !this$1$1.maxIndex || index > this$1$1.maxIndex || this$1$1.sets && !includes(this$1$1.sets, index);
                     }
                 });
                 if (this.length && !this.dragging && !this.stack.length) {
@@ -8143,11 +8286,11 @@
                 }
                 var actives = this._getTransitioner(this.index).getActives();
                 this.slides.forEach(function(slide) {
-                    return toggleClass(slide, this$1.clsActive, includes(actives, slide));
+                    return toggleClass(slide, this$1$1.clsActive, includes(actives, slide));
                 });
                 if (this.clsActivated && (!this.sets || includes(this.sets, toFloat(this.index)))) {
                     this.slides.forEach(function(slide) {
-                        return toggleClass(slide, this$1.clsActivated || "", includes(actives, slide));
+                        return toggleClass(slide, this$1$1.clsActivated || "", includes(actives, slide));
                     });
                 }
             },
@@ -8178,14 +8321,14 @@
         },
         methods: {
             reorder: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (this.finite) {
                     css(this.slides, "order", "");
                     return;
                 }
                 var index = this.dir > 0 && this.slides[this.prevIndex] ? this.prevIndex : this.index;
                 this.slides.forEach(function(slide, i) {
-                    return css(slide, "order", this$1.dir > 0 && i < index ? 1 : this$1.dir < 0 && i >= this$1.index ? -1 : "");
+                    return css(slide, "order", this$1$1.dir > 0 && i < index ? 1 : this$1$1.dir < 0 && i >= this$1$1.index ? -1 : "");
                 });
                 if (!this.center) {
                     return;
@@ -8242,7 +8385,7 @@
                 return this.item;
             },
             handler: function(ref) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var type = ref.type;
                 var ref_detail = ref.detail;
                 var percent = ref_detail.percent;
@@ -8250,11 +8393,11 @@
                 var timing = ref_detail.timing;
                 var dir = ref_detail.dir;
                 fastdom.read(function() {
-                    var propsFrom = this$1.getCss(getCurrentPercent(type, dir, percent));
-                    var propsTo = this$1.getCss(isIn(type) ? .5 : dir > 0 ? 1 : 0);
+                    var propsFrom = this$1$1.getCss(getCurrentPercent(type, dir, percent));
+                    var propsTo = this$1$1.getCss(isIn(type) ? .5 : dir > 0 ? 1 : 0);
                     fastdom.write(function() {
-                        css(this$1.$el, propsFrom);
-                        Transition.start(this$1.$el, propsTo, duration, timing).catch(noop);
+                        css(this$1$1.$el, propsFrom);
+                        Transition.start(this$1$1.$el, propsTo, duration, timing).catch(noop);
                     });
                 });
             }
@@ -8274,15 +8417,15 @@
                 return this.item;
             },
             handler: function(ref) {
-                var this$1 = this;
+                var this$1$1 = this;
                 var type = ref.type;
                 var ref_detail = ref.detail;
                 var percent = ref_detail.percent;
                 var dir = ref_detail.dir;
                 fastdom.read(function() {
-                    var props = this$1.getCss(getCurrentPercent(type, dir, percent));
+                    var props = this$1$1.getCss(getCurrentPercent(type, dir, percent));
                     fastdom.write(function() {
-                        return css(this$1.$el, props);
+                        return css(this$1$1.$el, props);
                     });
                 });
             }
@@ -8480,11 +8623,11 @@
             pos: {}
         },
         created: function() {
-            var this$1 = this;
+            var this$1$1 = this;
             [ "init", "start", "move", "end" ].forEach(function(key) {
-                var fn = this$1[key];
-                this$1[key] = function(e) {
-                    assign(this$1.pos, getEventPos(e));
+                var fn = this$1$1[key];
+                this$1$1[key] = function(e) {
+                    assign(this$1$1.pos, getEventPos(e));
                     fn(e);
                 };
             });
@@ -8629,7 +8772,7 @@
                 }
             },
             end: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 off(document, pointerMove, this.move);
                 off(document, pointerUp, this.end);
                 off(window, "scroll", this.scroll);
@@ -8652,7 +8795,7 @@
                 this.touched.forEach(function(ref) {
                     var clsPlaceholder = ref.clsPlaceholder;
                     var clsItem = ref.clsItem;
-                    return this$1.touched.forEach(function(sortable) {
+                    return this$1$1.touched.forEach(function(sortable) {
                         return removeClass(sortable.items, clsPlaceholder, clsItem);
                     });
                 });
@@ -8660,10 +8803,10 @@
                 removeClass(document.documentElement, this.clsDragState);
             },
             insert: function(element, target) {
-                var this$1 = this;
+                var this$1$1 = this;
                 addClass(this.items, this.clsItem);
                 var insert = function() {
-                    return target ? before(target, element) : append(this$1.target, element);
+                    return target ? before(target, element) : append(this$1$1.target, element);
                 };
                 this.animate(insert);
             },
@@ -8813,18 +8956,18 @@
         },
         methods: {
             show: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (this.isToggled(this.tooltip || null) || !this.title) {
                     return;
                 }
                 this._unbind = once(document, "show keydown " + pointerDown, this.hide, false, function(e) {
-                    return e.type === pointerDown && !within(e.target, this$1.$el) || e.type === "keydown" && e.keyCode === 27 || e.type === "show" && e.detail[0] !== this$1 && e.detail[0].$name === this$1.$name;
+                    return e.type === pointerDown && !within(e.target, this$1$1.$el) || e.type === "keydown" && e.keyCode === 27 || e.type === "show" && e.detail[0] !== this$1$1 && e.detail[0].$name === this$1$1.$name;
                 });
                 clearTimeout(this.showTimer);
                 this.showTimer = setTimeout(this._show, this.delay);
             },
             hide: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (matches(this.$el, "input:focus")) {
                     return;
                 }
@@ -8833,20 +8976,20 @@
                     return;
                 }
                 this.toggleElement(this.tooltip, false, false).then(function() {
-                    this$1.tooltip = remove$1(this$1.tooltip);
-                    this$1._unbind();
+                    this$1$1.tooltip = remove$1(this$1$1.tooltip);
+                    this$1$1._unbind();
                 });
             },
             _show: function() {
-                var this$1 = this;
+                var this$1$1 = this;
                 this.tooltip = append(this.container, '<div class="' + this.clsPos + '"> <div class="' + this.clsPos + '-inner">' + this.title + "</div> </div>");
                 on(this.tooltip, "toggled", function(e, toggled) {
-                    this$1.updateAria(toggled);
+                    this$1$1.updateAria(toggled);
                     if (!toggled) {
                         return;
                     }
-                    this$1.positionAt(this$1.tooltip, this$1.$el);
-                    this$1.origin = this$1.getAxis() === "y" ? flipPosition(this$1.dir) + "-" + this$1.align : this$1.align + "-" + flipPosition(this$1.dir);
+                    this$1$1.positionAt(this$1$1.tooltip, this$1$1.$el);
+                    this$1$1.origin = this$1$1.getAxis() === "y" ? flipPosition(this$1$1.dir) + "-" + this$1$1.align : this$1$1.align + "-" + flipPosition(this$1$1.dir);
                 });
                 this.toggleElement(this.tooltip, true);
             },
@@ -8950,7 +9093,7 @@
         },
         methods: {
             upload: function(files) {
-                var this$1 = this;
+                var this$1$1 = this;
                 if (!files.length) {
                     return;
                 }
@@ -8977,32 +9120,32 @@
                 var upload = function(files) {
                     var data = new FormData();
                     files.forEach(function(file) {
-                        return data.append(this$1.name, file);
+                        return data.append(this$1$1.name, file);
                     });
-                    for (var key in this$1.params) {
-                        data.append(key, this$1.params[key]);
+                    for (var key in this$1$1.params) {
+                        data.append(key, this$1$1.params[key]);
                     }
-                    ajax(this$1.url, {
+                    ajax(this$1$1.url, {
                         data: data,
-                        method: this$1.method,
-                        responseType: this$1.type,
+                        method: this$1$1.method,
+                        responseType: this$1$1.type,
                         beforeSend: function(env) {
                             var xhr = env.xhr;
-                            xhr.upload && on(xhr.upload, "progress", this$1.progress);
+                            xhr.upload && on(xhr.upload, "progress", this$1$1.progress);
                             [ "loadStart", "load", "loadEnd", "abort" ].forEach(function(type) {
-                                return on(xhr, type.toLowerCase(), this$1[type]);
+                                return on(xhr, type.toLowerCase(), this$1$1[type]);
                             });
-                            return this$1.beforeSend(env);
+                            return this$1$1.beforeSend(env);
                         }
                     }).then(function(xhr) {
-                        this$1.complete(xhr);
+                        this$1$1.complete(xhr);
                         if (chunks.length) {
                             upload(chunks.shift());
                         } else {
-                            this$1.completeAll(xhr);
+                            this$1$1.completeAll(xhr);
                         }
                     }, function(e) {
-                        return this$1.error(e);
+                        return this$1$1.error(e);
                     });
                 };
                 upload(chunks.shift());
@@ -9560,8 +9703,8 @@
     })(window);
 })();
 
-/*function formsubmit() {
-    var opurl = "https://openness-staging.onsumaye.com/index.php?option=com_products&task=githubpages_release_request";
+function formsubmit() {
+    var opurl = apiURL + "/index.php?option=com_products&task=githubpages_release_request";
     var form = $("#requestAccess");
     var url = $.ajax({
         type: form.attr("method"),
@@ -9571,7 +9714,7 @@
         success: function(data) {
             var data = jQuery.parseJSON(data);
             if (data.status == 1) {
-                window.location.href = "/intel-smart-edge-open/thankyou";
+                window.location.href = "/thankyou";
             } else {
                 $("#bug").html(data.msg.serverError);
             }
@@ -9580,7 +9723,7 @@
 }
 
 function contactformsubmit() {
-    var opurl = "https://openness.localhost.com/index.php?option=com_products&task=githubpages_contact_request";
+    var opurl = apiURL + "/index.php?option=com_products&task=githubpages_contact_request";
     var form = $("#contact");
     var url = $.ajax({
         type: form.attr("method"),
@@ -9590,13 +9733,13 @@ function contactformsubmit() {
         success: function(data) {
             var data = jQuery.parseJSON(data);
             if (data.status == 1) {
-                window.location.href = "/intel-smart-edge-open/thankyou";
+                window.location.href = "/thankyou";
             } else {
                 $("#bug").html(data.msg.serverError);
             }
         }
     });
-}*/
+}
 
 jQuery(document).ready(function() {
     jQuery("input[name='existing_member']").click(function() {
@@ -9617,25 +9760,237 @@ jQuery(document).ready(function() {
             $(".cn-yes").hide();
         }
     });
-    
-    
+    jQuery.validator.addMethod("globalNumberAllowed", function(value, element) {
+        return this.optional(element) || /^[\d ()+-.]+$/.test(value);
+    }, "Alphanumerics, spaces, underscores, dashes & dots only.");
+    jQuery.validator.addMethod("checkValidEmail", function(value, element, param) {
+        return this.optional(element) || /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/i.test(value);
+    }, "Please enter valid email id.");
+    jQuery.validator.addMethod("numberOnly", function(value, element) {
+        return this.optional(element) || value == value.match(/^[0-9]+$/);
+    });
+    jQuery.validator.addMethod("stringPattern", function(value, element) {
+        return true;
+    });
+    jQuery.validator.addMethod("alphabetOnlyName", function(value, element) {
+        return this.optional(element) || value == value.match(/^[a-zA-Z \s]+$/);
+    });
+    jQuery.validator.addMethod("check_subscribe", function(value, element) {
+        if (jQuery("#agreecheck").is(":checked")) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    jQuery("#requestAccess").validate({
+        errorElement: "small",
+        ignore: "",
+        focusInvalid: false,
+        invalidHandler: function(form, validator) {
+            console.log(validator);
+            if (!validator.numberOfInvalids()) return;
+            jQuery("html, body").animate({
+                scrollTop: jQuery(validator.errorList[0].element).offset().top
+            }, 100);
+        },
+        rules: {
+            name: {
+                required: true,
+                alphabetOnlyName: true,
+                minlength: 3,
+                maxlength: 100
+            },
+            last_name: {
+                required: true,
+                alphabetOnlyName: true,
+                minlength: 3,
+                maxlength: 100
+            },
+            email: {
+                required: true,
+                checkValidEmail: true
+            },
+            username: {
+                required: true
+            },
+            agreecheck: {
+                check_subscribe: true
+            },
+            existing_member: {
+                required: true
+            },
+            companyname: {
+                required: function() {
+                    if (jQuery('input:radio[name="existing_member"]:checked').val() == "yes") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            represet_company_name: {
+                required: function() {
+                    if (jQuery('input:radio[name="existing_member"]:checked').val() == "no") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+                maxlength: 300
+            },
+            primary_contact: {
+                required: true,
+                maxlength: 300
+            },
+            interest: {
+                required: true,
+                maxlength: 300
+            },
+            use_case: {
+                required: true,
+                maxlength: 300
+            },
+            commercialize: {
+                required: true
+            }
+        },
+        messages: {
+            name: {
+                required: "Please enter First Name.",
+                alphabetOnlyName: "Please enter valid Name.",
+                minlength: "Please enter minimum 3 characters.",
+                maxlength: "Please enter maximum 100 characters."
+            },
+            last_name: {
+                required: "Please enter Last Name.",
+                alphabetOnlyName: "Please enter valid Name.",
+                minlength: "Please enter minimum 3 characters.",
+                maxlength: "Please enter maximum 100 characters."
+            },
+            existing_member: {
+                required: "Please select the option."
+            },
+            primary_contact: {
+                required: "Please enter primary contact.",
+                maxlength: "Please enter primary contact maximum 300 characters."
+            },
+            companyname: {
+                required: "Please select the company."
+            },
+            represet_company_name: {
+                required: "Please enter the company you represent.",
+                maxlength: "Please enter the company you represent maximum 300 characters."
+            },
+            interest: {
+                required: "Please enter your interested features.",
+                maxlength: "Please enter your interested features maximum 300 characters."
+            },
+            use_case: {
+                required: "Please enter your use cases for edge.",
+                maxlength: "Please enter your use cases for edge maximum 300 characters."
+            },
+            commercialize: {
+                required: "Please select the option."
+            },
+            email: {
+                required: "Please enter Email Address.",
+                checkValidEmail: "Please enter a valid Email Address."
+            },
+            username: {
+                required: "Please enter atleast one Username."
+            },
+            agreecheck: {
+                check_subscribe: "Please select privacy policy."
+            },
+            hiddenRecaptcha: {
+                required: "Please verify the reCaptcha."
+            }
+        },
+        errorPlacement: function(error, element) {
+            if (element.is(":radio")) {
+                error.appendTo(element.parents(".seprateBox"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function(form) {
+            formsubmit();
+        }
+    });
+    jQuery("#contact").validate({
+        errorElement: "small",
+        ignore: "",
+        focusInvalid: false,
+        invalidHandler: function(form, validator) {
+            console.log(validator);
+            if (!validator.numberOfInvalids()) return;
+            jQuery("html, body").animate({
+                scrollTop: jQuery(validator.errorList[0].element).offset().top
+            }, 100);
+        },
+        rules: {
+            first_name: {
+                required: true,
+                alphabetOnlyName: true,
+                minlength: 3,
+                maxlength: 100
+            },
+            last_name: {
+                required: true,
+                alphabetOnlyName: true,
+                minlength: 3,
+                maxlength: 100
+            },
+            email: {
+                required: true,
+                checkValidEmail: true
+            },
+            message: {
+                required: true
+            }
+        },
+        messages: {
+            first_name: {
+                required: "Please enter first Name.",
+                alphabetOnlyName: "Please enter valid Name.",
+                minlength: "Please enter minimum 3 characters.",
+                maxlength: "Please enter maximum 100 characters."
+            },
+            last_name: {
+                required: "Please enter last Name.",
+                alphabetOnlyName: "Please enter valid Name.",
+                minlength: "Please enter minimum 3 characters.",
+                maxlength: "Please enter maximum 100 characters."
+            },
+            email: {
+                required: "Please enter Email Address.",
+                checkValidEmail: "Please enter a valid Email Address."
+            },
+            message: {
+                required: "Please enter the message."
+            }
+        },
+        errorPlacement: function(error, element) {},
+        submitHandler: function(form) {
+            contactformsubmit();
+        }
+    });
 });
 
+function hideError() {
+    jQuery("[for=hiddenRecaptcha]").css("display", "none");
+}
 
 function cleanString(str) {
     return str.replace(/[^A-Za-z0-9,_()&reg;.-:{}$%@!~=+'&#39;`? ]/g, "");
 }
 jQuery(window).on('load', function(){
-   jQuery('.menuIcon').on('click', function(){
-        jQuery(this).parent('.toggleMenu').toggleClass('showMenu')
-    })
-    var pathname = window.location.pathname;
-    if(pathname.includes('/docs/')){
-jQuery('.uk-navbar-container .uk-navbar-left .uk-navbar-nav li a[href="'+pathname+'"]').parent('li').addClass('uk-active');
-    }
-})
-jQuery(window).on('resize', function(){
-    if(jQuery(window).width() >= 960){
-        jQuery('#offcanvas-docs').removeClass('uk-offcanvas-overlay uk-open');
-    }
-})
+    jQuery('.menuIcon').on('click', function(){
+          jQuery(this).parent('.toggleMenu').toggleClass('showMenu')
+      })
+  })
+  jQuery(window).on('resize', function(){
+      if(jQuery(window).width() >= 960){
+          jQuery('#offcanvas-docs').removeClass('uk-offcanvas-overlay uk-open');
+      }
+  })
