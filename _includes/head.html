@@ -3,13 +3,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% if page.name == 'index.md' %}
-  {%- assign pageName = 'Home' -%}
-  {%- else -%}
-  {%- assign pageName = page.name -%}
-  {%- endif -%}
-  {%- assign title = pageName | replace: "-"," " | replace: "_"," " | split: ".md" | first -%}
-  {%- assign pageTitle = title | split: ' ' -%}
-  {%- capture pageTitleUpper -%}{%- for word in pageTitle -%}{{ word | capitalize }} {%- endfor -%}{%- endcapture -%}
+  {% endif %}
  <title>Intel® Smart Edge Open - Bring Your Edge Solution to Market Faster | {{ pageTitleUpper }}</title>
   {% seo title=false %}
   <meta property="og:image" content="{% if site.logo contains 'http' %}{{ site.logo }}{% else %}{{ site.uploads | absolute_url }}{{ site.logo }}{% endif %}"/>

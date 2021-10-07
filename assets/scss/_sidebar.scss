@@ -164,6 +164,18 @@
                     a{
                         padding: 0;
                         line-height: 1.8;
+                        &:hover{
+                            color:$blue;
+                        }
+                    }
+                    &.uk-active{
+                        a{
+                            color:$blue;
+                            font-weight: bold;
+                            &::before{
+                                display: none;
+                            }
+                        }
                     }
                 }
             }
@@ -174,6 +186,24 @@
             a{
                 font-size: 14px;
                 color: $menuColor;
+            }
+        }
+    }
+}
+.sidebar-fixed-width{
+    & + .uk-width-1-1{
+        article{
+            article{
+                .article-content{
+                    .highlighter-rouge:first-child{
+                        display: none;
+                    }
+                    table{
+                        display: block;
+                        max-width: 100%;
+                        overflow-x: auto;
+                    }
+                }
             }
         }
     }
@@ -202,11 +232,11 @@
             height: 70vh;
             top: 17%;
             padding: 20px 0 20px 20px;
-            width: 320px;
+            width: 280px;
             border-style: solid;
             border-color: #ccc;
             border-width: 2px 2px 2px 0px;
-            left: -320px;
+            left: -280px;
             transition: .3s;
             #contact-button{
                 display: block;

@@ -9,7 +9,7 @@ permalink: /release-notes/
     <p>September 30th, 2021</p>
 </div>
 <div class="noteRight">
-    <h3>21.03 Updates</h3>
+    <h3>21.09 Updates</h3>
     <p>We are pleased to announce the first release Intel&reg; Smart Edge Open.</p>
     <p>Built from an OpenNESS foundation and representing more than two years of development, the 21.09 release of Intel&reg; Smart Edge Open introduces several technical improvements including a new Developer Experience Kit and an upgraded experience kit for creating 5G private wireless networks.</p>
     <a class="uk-button uk-button-info uk-button-small uk-margin-small-bottom">Added</a>
@@ -58,5 +58,5 @@ permalink: /release-notes/
     <p>Previous</p>
 </div>
 <div class="noteRight uk-margin-large-bottom">
-    <a href="/ido-specs/openness_releasenotes/" title="Previous release notes">Previous release notes</a>
+    <a href="/ido-specs/smartedge-open_releasenotes/" title="Previous release notes">Previous release notes</a>
 </div>
