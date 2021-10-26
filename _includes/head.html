@@ -10,7 +10,6 @@
   {%- assign title = pageName | replace: "-"," " | replace: "_"," " | split: ".md" | first -%}
   {%- assign pageTitle = title | split: ' ' -%}
   {%- capture pageTitleUpper -%}{%- for word in pageTitle -%}{{ word | capitalize }} {%- endfor -%}{%- endcapture -%}
-  {% endif %}
   <title>Intel® Smart Edge Open | {{ pageTitleUpper }}</title>
   {% seo title=false %}
   <meta property="og:image" content="{% if site.logo contains 'http' %}{{ site.logo }}{% else %}{{ site.uploads | absolute_url }}{{ site.logo }}{% endif %}"/>
