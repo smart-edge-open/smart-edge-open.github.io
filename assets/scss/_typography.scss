@@ -21,11 +21,7 @@ h3{
     letter-spacing: 0.8px;
     color: $black;
     margin: 0 auto 20px;
-}/* 
-.headLine{
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 20px;
-} */
+}
 p{
     margin: 0 auto 20px;
     clear: both;
@@ -36,6 +32,9 @@ ul, li{
     margin-top: 0;
     clear: both;
     word-break: break-word;
+}
+ul > li > ul{
+    margin-bottom: 0 !important;
 }
 svg, svg *{
     color: $blue;
@@ -64,8 +63,19 @@ a{
         background-color: darken($blue, 10%);
     }
 }
-.uk-article-title{
+.uk-article-title:not(.blog-title){
     display: none;
+}
+pre code{
+    font-family: monospace, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    *{
+        font-family: monospace, Arial, Helvetica, sans-serif;
+        font-size: 16px; 
+    }
+}
+:not(pre)>code, :not(pre)>kbd, :not(pre)>samp{
+    color: #00c7fd;
 }
 @media (max-width:1199px){
     *{

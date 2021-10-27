@@ -1,0 +1,15 @@
+.blogBox{
+    padding: 40px;
+    .uk-card-header, .uk-card-footer{
+        padding: 0;
+    }
+    .uk-card-header{
+        margin-bottom: 18px;
+        h3{
+            margin-bottom: 10px;
+        }
+    }
+    .uk-card-footer{
+        margin-top: 25px;
+    }
+}

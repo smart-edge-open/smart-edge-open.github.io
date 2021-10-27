@@ -3,13 +3,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% if page.name == 'index.md' %}
-  {%- assign pageName = 'Home' -%}
-  {%- else -%}
-  {%- assign pageName = page.name -%}
-  {%- endif -%}
-  {%- assign title = pageName | replace: "-"," " | replace: "_"," " | split: ".md" | first -%}
-  {%- assign pageTitle = title | split: ' ' -%}
-  {%- capture pageTitleUpper -%}{%- for word in pageTitle -%}{{ word | capitalize }} {%- endfor -%}{%- endcapture -%}
+  {% assign pageName = 'Home' %}
+  {% elsif page.name == 'index.html' %}
+  {% assign pageName = 'Blog' %}
+  {% else %}
+    {% assign post_page_url = page.url | slice: 1, 4 %}
+    {% if post_page_url == 'post' %}
+      {% assign pageName = page.title %}
+    {% else %}
+      {% assign pageName = page.name %}
+    {% endif %}
+  {% endif %}
+  {% assign title = pageName | replace: "-"," " | replace: "_"," " | split: ".md" | first %}
+  {% assign pageTitle = title | split: ' ' %}
+  {% capture pageTitleUpper %}{% for word in pageTitle %}{{ word | capitalize }} {% endfor %}{% endcapture %}
   <title>Intel® Smart Edge Open | {{ pageTitleUpper }}</title>
   {% seo title=false %}
   <meta property="og:image" content="{% if site.logo contains 'http' %}{{ site.logo }}{% else %}{{ site.uploads | absolute_url }}{{ site.logo }}{% endif %}"/>
