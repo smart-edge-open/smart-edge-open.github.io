@@ -11,7 +11,7 @@ description: Please select a topic below related to your inquiry. If you don’t
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 <script type="text/javascript">
   jQuery(document).ready(function(){
-	  //jQuery('.select-p-c').select2({
+	//jQuery('.select-p-c').select2({
 	//});
   });
 </script>
