@@ -9741,7 +9741,7 @@ function contactformsubmit() {
     });
 }
 
-jQuery(document).ready(function() {
+/*jQuery(document).ready(function() {
     jQuery("input[name='existing_member']").click(function() {
         if (jQuery("input:radio[name=existing_member]:checked").val() == "yes") {
             $(".cn-no").hide();
@@ -9975,7 +9975,7 @@ jQuery(document).ready(function() {
             contactformsubmit();
         }
     });
-});
+});*/
 
 function hideError() {
     jQuery("[for=hiddenRecaptcha]").css("display", "none");

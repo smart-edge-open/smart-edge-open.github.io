@@ -1,0 +1,171 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+    <style>
+      html
+      {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
+
+      *,
+      *:before,
+      *:after
+      {
+        box-sizing: inherit;
+      }
+
+      body
+      {
+        margin:0;
+        background: #fafafa;
+      }
+    </style>
+  </head>
+
+  <body>
+<style>
+/*	custom CSS for header & footer: STARTS 	*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+html, body{font-family:'Montserrat', sans-serif;}
+#swagger-ui{min-height:calc(100vh - 139px);}
+.contentArea{max-width:1600px;width:95%;padding-left:15px;padding-right:15px;margin-left:auto;margin-right:auto;}
+header{background-color:#fff;padding:32.5px 0;}
+header .logo{max-width:280px;}
+header .menuBar{float:right;border-bottom:2px solid #ececec;padding-left:0;margin-right:41px;margin-top:7px;}
+header .menuBar li{display:inline-block;margin:0 24px;float:left; position:relative;}
+header .menuBar li:first-child{margin-left:0;}
+header .menuBar li:last-child{margin-right:0;}
+header .menuBar li a{text-transform:uppercase;font-size:19px;font-weight:700;color:#555555;text-decoration:none;border-bottom:3px solid transparent;padding:15.399px 0;display:block;}
+header .menuBar li.parent > a:before{font-family: "FontAwesome";content: "\f107";position: absolute;left: 125px;top: 16px;color: #555555;}
+header .menuBar li:hover > a{border-bottom:5px solid #c3d241;margin-bottom:-2px;}
+.menuBar li ul{ display:none;background-color: #193f6e; color:#fff;padding: 0;min-width: 233px;left: 0px;margin-top: 2px;position: absolute;}
+header .menuBar li ul li a{ border:0; padding: 1.1em 1em;color: #fff;font-size: 17px; font-weight: 700;}
+.menuBar li ul li a:hover{ border:0;}	
+.menuBar li:hover ul{ display:block;}
+footer{border-top:1px solid #939393;text-align:center;padding:37px 0;background-color:#fff;}
+footer ul{display:block;text-align:center;padding:0;margin:0;}
+footer ul li{list-style-type:none;display:inline-block;color:#555;font-size:18px;font-weight:300;}
+footer ul li:not(:last-child):after{content:"|";width:27px;text-align:center;display:inline-block;}
+footer ul li a{color:#555;font-size:18px;font-weight:300;text-decoration:none;}
+footer ul li a:hover{color:#00aeef;text-decoration:none;}
+@media (min-width:769px){
+.menuOuter{display:none;}
+header .menuBar{display:block!important;}
+}
+@media (max-width:1280px){
+header .menuBar{margin-right:0;}
+header .menuBar li{margin:0 11px;}
+header .menuBar li a{font-size:17px;}
+}
+@media (max-width:991px){
+.contentArea{padding-left:10px;padding-right:10px;}
+header .menuBar li{margin:0 6px;}
+header .menuBar li a{font-size:13px;}
+}
+@media (max-width:768px){
+.menuOuter{display:block;position:absolute;right:20px;top:15px;font-family:'icomoon';padding:20px;}
+.menuOuter [class^="menu"]{width:27px;margin-bottom:6px;background-color:#555;display:block;height:2px;}
+img[alt="Online validator badge"]{position:absolute;right:0;}
+.logo{width:224px;}
+header{padding:18.5px 0;}
+header .menuBar{width:340px;background-color:#193f6e;padding:0 15px;position:absolute;right:30px;top:91px;z-index:1;display:none;margin-top:0!important;max-width:90%;}
+header .menuBar li a:hover{border-color:transparent;}
+header .menuBar li{display:block;width:100%;}
+header .menuBar li a{display:block;color:#fff;font-size:16px;}
+footer{padding:26.5px 0;}
+footer ul li:first-child{display:block;width:100%;margin-bottom:7px;}
+footer ul li:first-child:after{display:none;}
+}
+@media (max-width:479px){
+.topbar-wrapper{display:block!important;text-align:center;}
+.swagger-ui .topbar a{margin-bottom:10px;display:block;max-width:initial;}
+.logo{width:224px;width:200px;}
+.swagger-ui .topbar .download-url-wrapper input[type=text]{max-width:inherit;}
+footer ul li, footer ul li a{font-size:16px;}
+}
+/*	custom CSS for header & footer: ENDS 	*/
+</style>
+		<header>
+			<div class="contentArea">
+				<a href="https://www.openness.org"><img src="https://www.openness.org/images/openness-logo.png" alt="OpenNESS" class="logo" /></a>
+				<span class="menuOuter">
+					<span class="menuTop"></span><span class="menuMiddle"></span><span class="menuBottom"></span>
+				</span>
+				<ul class="menuBar">
+					<li><a href="https://www.openness.org/">Home</a></li>
+					<li><a href="https://www.openness.org/about">About</a></li>
+					<li><a href="https://www.openness.org/resources">Resources</a></li>
+					<li class="parent">
+						<a href="https://www.openness.org/developer">Developer</a>
+						<ul class="nav-child">
+							<li><a href="https://www.openness.org/api-documentation">API Documentation</a></li>
+						</ul>
+					</li>
+					<li><a href="https://www.openness.org/contact-us">Contact Us</a></li>
+				</ul>
+			</div>
+		</header>
+    <div id="swagger-ui"></div>
+		<footer>
+			<ul class="">
+				<li>&copy; OpenNESS</li>
+				<li><a href="http://www.intel.com/content/www/us/en/legal/terms-of-use.html" target="_blank" rel="noopener noreferrer">Terms of Use</a></li>
+				<li><a href="https://www.intel.com/content/www/us/en/privacy/intel-privacy-notice.html" target="_blank" rel="noopener noreferrer">Privacy</a></li>
+				<li><a href="http://www.intel.com/content/www/us/en/privacy/intel-cookie-notice.html" target="_blank" rel="noopener noreferrer">Cookies</a></li>
+			</ul>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="./swagger-ui-bundle.js"> </script>
+    <script src="./swagger-ui-standalone-preset.js"> </script>
+    <script>
+    window.onload = function() {
+      // Begin Swagger UI call region
+      const ui = SwaggerUIBundle({
+        url: "https://petstore.swagger.io/v2/swagger.json",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout"
+      })
+      // End Swagger UI call region
+
+      window.ui = ui
+    }
+	
+	if ( $(window).width() <= 768 ) {
+	
+		$(document).ready(function(){
+			$('.menuOuter').on('click', function(){
+				$('.menuBar').slideToggle(500);
+			});
+		});
+		$(document).on('click', function(e){
+			if(!jQuery(e.target).hasClass('menuOuter')){
+				$('.menuBar').slideUp();
+			}
+		});
+		$(document).live('click', function(e){
+			if(!jQuery(e.target).hasClass('menuOuter')){
+				$('.menuBar').slideUp();
+			}
+		});
+	}
+  </script>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+html
+{
+	box-sizing: border-box;
+	overflow: -moz-scrollbars-vertical;
+	overflow-y: scroll;
+}
+
+*,
+*:before,
+*:after
+{
+    box-sizing: inherit;
+}
+
+body
+{
+	margin:0;
+	/*background: #fafafa;*/
+}
+/*	custom CSS for header & footer: STARTS 	*/
+html, body{font-family:'Montserrat', sans-serif;}
+#swagger-ui{min-height:calc(100vh - 139px);}
+.contentArea{max-width:1600px;width:95%;padding-left:15px;padding-right:15px;margin-left:auto;margin-right:auto;}
+header{background-color:#fff;padding:32.5px 0;}
+header .logo{width:280px;height:auto;max-width:100%;}
+header .menuBar{float:right;border-bottom:2px solid #ececec;padding-left:0;margin-right:41px;margin-top:7px;}
+.menubar .container{width:100%;}
+header .menuBar li{display:inline-block;margin:0 24px;float:left; position:relative;}
+header .menuBar li:first-child{margin-left:0;}
+header .menuBar li:last-child{margin-right:0;}
+header .menuBar li a{text-transform:uppercase;font-size:19px;font-weight:700;color:#555555;text-decoration:none;border-bottom:3px solid transparent;padding:15.399px 0;display:block;}
+header .menuBar li.parent > a:after{font-family: "FontAwesome";content: "\f107";position: absolute;right: -15px;top: 16px;color: #555555;}
+header .menuBar > li:hover > a{border-bottom:5px solid #c3d241;margin-bottom:-2px;}
+.menuBar li ul{ display:none;background-color: #193f6e; color:#fff;padding: 0;min-width: 233px; width: 240px;left: 0px;margin-top: 2px;position: absolute;}
+header .menuBar li ul li{ margin:0; border-bottom: 1px solid #3a6090; width: 100%;}
+/*header .menuBar li ul li:nth-child(3) a, header .menuBar li:nth-child(2) ul li:nth-child(2) a{line-height: 20px;}*/
+header .menuBar li ul li a{ border:0; padding:11px 1em;color: #fff;font-size: 14px; font-weight: 700;line-height:22px;}
+.menuBar li ul li a:hover{ background-color:rgba(255, 255, 255, 0.1); border-bottom: 1px solid #3a6090;}	
+.menuBar li:hover ul{ display:block;}
+header .menuBar > li.parent .social-down{display: none;}
+footer{border-top:1px solid #939393;text-align:center;padding:37px 0;background-color:#fff;}
+footer ul{display:block;text-align:center;padding:0;margin:0;}
+footer ul li{list-style-type:none;display:inline-block;color:#555;font-size:18px;font-weight:300;}
+footer ul li:not(:last-child):after{content:"|";width:27px;text-align:center;display:inline-block;}
+footer ul li a{color:#555;font-size:18px;font-weight:300;text-decoration:none;}
+footer ul li a:hover{color:#00aeef;text-decoration:none;}
+/*header .menuBar li ul li:hover { border:0;}*/
+.api-banner{background-repeat: no-repeat;background-size: cover;background-position: center bottom;min-height: 300px;background-image: url(https://s3.us-east-2.amazonaws.com/openness/inner-banner.jpg);}
+section .contentArea2 {width: 100%;max-width: 1460px;margin: 0 auto;padding: 0 20px;}
+.api-col-wrap{ width:100%;margin:40px 0 30px;display: table;}
+.api-col-left, .api-col-right{ width:75%; display: table-cell;}
+.api-col-right{ width:25%; position:relative;}
+.api-col-left h2{ margin:0;}
+.api-col-left h2 a{color: #193f6e; text-decoration:none;}
+.api-col-left h2 a span{color: #c2d42f;}
+
+/*Select*/
+.api-col-right select{ width:100%; font-size: 14px;font-weight: 700;padding: 5px 20px 5px 5px; border: 2px solid #41444e; background-color:#f7f7f7; font-family: 'Montserrat', sans-serif; border-radius: 4px;-o-appearance: none;-ms-appearance: none;-webkit-appearance: none;-moz-appearance: none;appearance: none; -moz-box-shadow: 0 1px 2px 0 rgba(0,0,0,.25); -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.25); box-shadow: 0 1px 2px 0 rgba(0,0,0,.25); text-overflow: ellipsis;}
+.api-col-right:after{ font-family: "FontAwesome"; content: "\f107";position: absolute;right: 10px;top: 14px;font-size: 17px;color: #000; height: 8px;line-height: 5px;}
+/*.api-col-right select option.head{ font-weight:bold !important; color:#193f6e;}*/
+/*End Select*/
+
+.api-description h1, .api-description h2 {margin-top: 20px;}
+.api-description h1, .api-description h2 {font-size: 32px;margin: 0 0 15px 0;color: #193f6e;font-weight: 600;}
+.api-description p, .api-description ol li{ font-weight: 300; color: #555; font-size: 20px; line-height: 32px; font-family: 'Montserrat', sans-serif; margin-bottom:20px;}
+.information-container .block .info{ display:none !important;}
+.menuBar li:nth-child(5) ul{left:auto !important; right:0 !important;}
+
+@media (min-width:769px){
+.menuOuter{display:none;}
+header .menuBar{display:block!important;}
+}
+@media (max-width:1400px){
+header .menuBar li a{font-size:18px;}
+}
+@media (max-width:1300px){
+header .menuBar li{margin:0 17px;}
+header .menuBar li a{font-size:18px;font-weight:500;}
+}
+@media (max-width:1280px){
+header .contentArea{width:98%;}
+header .menuBar{margin-right:0;}
+header .menuBar li{margin:0 17px;}
+/*header .menuBar li a{font-size:18px;}*/
+header .menuBar li.parent > a:after{right: -13px;}
+}
+@media (max-width:1199px){
+header .menuBar li{margin:0 14px;}
+header .menuBar li a{font-size:13px;}
+header .logo {max-width: 250px;}
+}
+@media (max-width:1024px){
+.api-col-left{ width:70%;}
+.api-col-right{ width:30%;}
+header .menuBar li{margin:0 12px;}
+header .menuBar li a{font-size:13px;}
+}
+@media (max-width:991px){
+header .menuBar li.parent > a:after {right: -9px; font-size: 10px; top: 18px;}
+.contentArea{padding-left:10px;padding-right:10px;}
+header .menuBar li{margin:0 8px;}
+header .menuBar li a{font-size:13px;}
+#header .navigation{padding-top:30px;}
+header .logo {max-width:177px;}
+}
+@media (max-width:850px){
+header .menuBar li{margin:0 9px;}
+header .menuBar li a{font-size:11px;}
+header .logo {max-width:156px;}
+header .menuBar{margin-top:-5px;}
+}
+
+@media (max-width:768px){
+.menubar ul li>a {/*padding: 5px 0 !important;*/}
+.menubar .nav.menu > li i {font-weight:100!important;font-size:19px!important;}
+.menuOuter{display:block;position:absolute;right:20px;top:15px;font-family:'icomoon';padding:20px;}
+.menuOuter [class^="menu"]{width:27px;margin-bottom:6px;background-color:#555;display:block;height:2px;}
+img[alt="Online validator badge"]{position:absolute;right:0;}
+.logo{width:224px;}
+header{padding:18.5px 0;}
+header .menuBar{width:340px;background-color:#193f6e;padding:0 15px;position:absolute;right:30px;top:91px;z-index:1;display:none;margin-top:0!important;max-width:90%; border-bottom: 0 solid #ececec;}
+header .menuBar li a:hover{border-color:transparent;}
+header .menuBar li{display:block;width:100%; margin:0; border-bottom: 1px solid #3a6090;}
+header .menuBar li a{display:block;color:#fff;font-size:16px;}
+footer{padding:26.5px 0;}
+footer ul li:first-child{display:block;width:100%;margin-bottom:7px;}
+footer ul li:first-child:after{display:none;}
+.menuBar li ul{ position: inherit; width: 100%;}
+header .menuBar li ul li { margin:0;}
+header .menuBar li ul li a {padding: 0.4em 0px 0.4em 20px;}
+header .menuBar li:hover > a{ border:0; margin-bottom: 0;}
+header .menuBar > li > ul > li:before{font-family:"FontAwesome"; content:"\f105"; position: absolute; left:5px; top: 12px; color:#fff;}
+header .menuBar > li.parent .social-down{font-family:"FontAwesome"; content:"\f107"; position: absolute; right: 6px; top: 15px; color:#fff; width: 50px; text-align: right; cursor: pointer;font-size: 19px; display: block;}
+header .menuBar li a{border-bottom:0px solid transparent;}
+header .menuBar li:first-child{margin:0;}
+header .menuBar li ul li:first-child{margin:0;}
+header .menuBar > li:nth-child(1) > a, header .menuBar > li:nth-child(2) > a, header .menuBar > li:nth-child(3) > a, header .menuBar > li:nth-child(4) > a, header .menuBar > li:nth-child(5) > a {width: 230px;}
+.menuBar li:hover ul{ display:none;}
+header .menuBar li.parent > a:after { display:none;}
+.api-col-left{ width:55%;}
+.api-col-right{ width:45%;}
+header .menuBar li ul.nav-child li:nth-child(5), header .menuBar li ul.nav-child li:last-child {border-bottom: 0px solid #3a6090;}
+}
+@media (max-width:767px){
+.api-col-left{ width:100%; display: block; margin-bottom:20px;}
+.api-col-right{ width:100%; display: block;}
+}
+@media (max-width:479px){
+.topbar-wrapper{display:block!important;text-align:center;}
+.swagger-ui .topbar a{margin-bottom:10px;display:block;max-width:initial;}
+.logo{width:224px;width:200px;}
+.swagger-ui .topbar .download-url-wrapper input[type=text]{max-width:inherit;}
+footer ul li, footer ul li a{font-size:16px;}
+}
+.swagger-ui .topbar { display: none !important; }	
+.swagger-ui .main .url { display: none !important; }	
+.opblock-body .try-out { display: none !important; }	
+/*	custom CSS for header & footer: ENDS 	*/
+/*	menu bar css starts	*/
+@media (max-width:1600px){
+header .menuBar li{margin:0 14px;}
+header .menuBar li a{font-size:16px;font-weight:600;}
+}
+@media (max-width:1400px){
+header .menuBar li a{font-size:14px;}
+}
+@media (min-width:769px) and (max-width:1199px){
+header .logo{max-width:20vw;}
+header .menuBar li.parent > a:after{top:16px;}
+header .menuBar{width:auto;float:right;}
+header .menuBar li{margin:0 11px;}
+header .contentArea > a:first-child{display:inline-block;}
+}
+@media (min-width:769px) and (max-width:1023px){
+header .menuBar li{margin:0 11px;}
+}
+@media (min-width:769px) and (max-width:991px){
+header .menuBar li{margin:0 7px;}
+header .menuBar li a{font-size:11.5px;}
+header .menuBar{margin-top:0;}
+}
+@media (min-width:769px) and (max-width:850px){
+header .menuBar li{margin:0 7px;}
+header .menuBar li a{font-size:10.5px;}
+header .menuBar li.parent > a:after{top:16px;right:-8px;}
+}
+@media (min-width:769px) and (max-width:850px){
+.tabRest{display:none!important;}
+.tabOnly{display:block!important;}
+}
+/*	menu bar css ends	*/
