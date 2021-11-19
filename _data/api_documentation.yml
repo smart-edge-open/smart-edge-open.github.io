@@ -1,0 +1,32 @@
+# API navigation links
+- title: Edge Application API
+  url: /api-documentation?api=eaa
+  short: eaa
+
+- title: Controller API
+  url: /api-documentation?api=controller
+  short: controller
+
+- title: Edge Application Authentication API
+  url: /api-documentation?api=auth
+  short: auth
+
+- title: Core Network Configuration API
+  url: /api-documentation?api=cups
+  short: cups
+
+- title: 5G Application Function (AF)
+  url: /api-documentation?api=af
+  short: af
+
+- title: 5G Network Exposure Function (NEF)
+  url: /api-documentation?api=nef
+  short: nef
+
+- title: 5G OAM
+  url: /api-documentation?api=5goam
+  short: 5goam
+
+- title: EMCO
+  url: /api-documentation?api=emco
+  short: emco

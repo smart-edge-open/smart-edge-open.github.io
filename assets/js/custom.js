@@ -53,7 +53,8 @@ function contactformsubmit() {
 }
 jQuery(document).ready(function () {
     jQuery("input[name='existing_member']").click(function () {
-
+        //Reset Value of 
+        jQuery('input:text[name=represet_company_name]').val('');
         if (jQuery('input:radio[name=existing_member]:checked').val() == "yes") {
             $('#companyname').empty();
             $('#companyname').append('<option value="" selected="selected">Select Company</option>');
@@ -162,23 +163,23 @@ jQuery(document).ready(function () {
                         return false;
                     }
                 },
-                //minlength:3,
-                maxlength: 300
+                maxlength: 300,
+                alphabetOnlyName: true,
             },
             primary_contact: {
                 required: true,
-                //minlength:3,
-                maxlength: 300
+                maxlength: 300,
+                alphabetOnlyName: true,
             },
             interest: {
                 required: true,
-                //minlength:3,
-                maxlength: 300
+                maxlength: 300,
+                alphabetOnlyName: true,
             },
             use_case: {
                 required: true,
-                //minlength:3,
-                maxlength: 300
+                maxlength: 300,
+                alphabetOnlyName: true,
             },
             commercialize: {
                 required: true
@@ -212,7 +213,8 @@ jQuery(document).ready(function () {
             primary_contact: {
                 required: "Please enter primary contact.",
                 //minlength: "Please enter primary contact minimum 3 characters.",
-                maxlength: "Please enter primary contact maximum 300 characters."
+                maxlength: "Please enter primary contact maximum 300 characters.",
+                alphabetOnlyName: "Please enter valid primary contact.",
             },
             companyname: {
                 required: "Please select the company."
@@ -220,17 +222,20 @@ jQuery(document).ready(function () {
             represet_company_name: {
                 required: "Please enter the company you represent.",
                 //minlength: "Please enter the company you represent minimum 3 characters.",
-                maxlength: "Please enter the company you represent maximum 300 characters."
+                maxlength: "Please enter the company you represent maximum 300 characters.",
+                alphabetOnlyName: "Please enter valid company you represent.",
             },
             interest: {
                 required: "Please enter your interested features.",
                 //minlength: "Please enter your interested features minimum 3 characters.",
-                maxlength: "Please enter your interested features maximum 300 characters."
+                maxlength: "Please enter your interested features maximum 300 characters.",
+                alphabetOnlyName: "Please enter valid interested features.",
             },
             use_case: {
                 required: "Please enter your use cases for edge.",
                 //minlength: "Please enter your use cases for edge minimum 3 characters.",
-                maxlength: "Please enter your use cases for edge maximum 300 characters."
+                maxlength: "Please enter your use cases for edge maximum 300 characters.",
+                alphabetOnlyName: "Please enter valid use cases for edge.",
             },
             commercialize: {
                 required: "Please select the option.",
