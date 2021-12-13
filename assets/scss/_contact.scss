@@ -3,15 +3,6 @@
         a{
             padding-right: 60px;
             position: relative;
-            .linkHead{
-                color:$black;
-                display: block;
-                line-height: 1;
-            }
-            .linkText{
-                color: $menuColor;
-                font-size: 16px;
-            }
             svg{
                 position: absolute;
                 right: 20px;
@@ -21,6 +12,28 @@
             }
             &:after{
                 display:none;
+            }
+        }
+        .linkHead{
+            color:$black;
+            display: block;
+            line-height: 1;
+        }
+        .linkText{
+            color: $menuColor;
+            font-size: 16px;
+            display: block;
+            margin-top: 5px;
+            a{
+                color: $blue;
+                font-size: inherit;
+                display: inline;
+                padding: 0;
+                border: 0;
+                &:hover{
+                    text-decoration: underline;
+                    color: $blue;
+                }
             }
         }
     }
