@@ -5,6 +5,27 @@ permalink: /release-notes/
 
 <!--{% include formspree.html email="my_name@gmail.com" redirect="/thanks/" name="true" subject="true" %}-->
 <h1 class="uk-text-left">Release Notes</h1>
+
+<div class="noteLeft">
+    <p>December 17th, 2021</p>
+</div>
+
+<div class="noteRight">
+    <h3>21.12 Updates</h3>
+    <p>We are pleased to announce the 21.12 release of Intel&reg; Smart Edge Open software, our second release of Intel&reg;</p>
+    <a class="uk-button uk-button-info uk-button-small uk-margin-small-bottom">Added</a>
+    <p>The <a href="/docs/experience-kits/developer-experience-kit">Developer Experience Kit</a> now supports <a href="https://www.intel.com/content/www/us/en/architecture-and-technology/security-libraries-for-data-center-article.html" target="_blank" >Intel&reg; Security Libraries for Data Center</a> (Intel&reg; SecL-DC) for platform integrity.  Platform integrity is established from a collection of both hardware and software that perform measurement and verification to ensure a platform boots into a trusted and desired state.</p>
+    <p>In addition, the Developer Experience Kit also supports <a target="_blank" href="https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html"> Intel&reg; Software Guard Extensions</a> (Intel&reg;  SGX) for protection of selected code and data within a hardened enclave. Developers can now partition their application into hardened enclaves or trusted execution environments to increase application security.</p>
+    <p>We are excited to announce an O-RAN compliant near-real time RAN Interface Controller (RIC) is available for the Developer Experience Kit and will soon be available for download from the <a target="_blank" href="https://www.intel.com/content/www/us/en/developer/tools/software-catalog/full-catalog.html?s=Newest&q=%22smart%2Bedge%2Bopen%22">Intel&reg; Developer Catalog.</a> The RIC can be used for development and testing of ORAN AI/ML xAPPs. A 5G RAN simulator is provided to facilitate development and testing.</p>
+    <p>Support has been added for the next generation Intel&reg; Xeon&reg;  D processor. More details will be provided after the product has launched.</p>
+    <br>
+    <style>
+        .uk-button.uk-button-info.uk-button-small.uk-margin-small-bottom{ 
+            margin-bottom: 20px !important;
+            }
+    </style>
+</div>
+
 <div class="noteLeft">
     <p>September 30th, 2021</p>
 </div>
