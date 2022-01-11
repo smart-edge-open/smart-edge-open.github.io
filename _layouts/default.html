@@ -4,7 +4,7 @@
     {% include head.html %}
 
     <body>
-
+    <div class="overlay"><img src="{{ '/assets/img/loader.gif' | relative_url }}"></div>
     {% if page.hero %}
         {% include hero.html %}
     {% else %}

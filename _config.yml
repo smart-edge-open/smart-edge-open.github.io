@@ -13,7 +13,9 @@ lang:               en
 baseurl:            ""
 
 
-apiURL: "https://www.openness.org"
+# apiURL: "https://www.openness.org"
+apiURL: "https://webservices.smart-edge.com"
+
 # Permalink URLs structure, for permalink style options see: https://jekyllrb.com/docs/permalinks/
 permalink:          /:title/
 

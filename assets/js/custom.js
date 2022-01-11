@@ -1,6 +1,7 @@
 
-function formsubmit() {
-    var opurl = apiURL+'/index.php?option=com_products&task=githubpages_release_request';
+function formsubmit(xhrKnown) {
+    //var opurl = apiURL+'/index.php?option=com_products&task=githubpages_release_request';
+    var opurl = apiURL+'/request-license.php';
     var form = $("#requestAccess");
     var url =
         $.ajax({
@@ -8,6 +9,9 @@ function formsubmit() {
             url: opurl,
             crossDomain: true,
             data: form.serialize(),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer "+xhrKnown);
+            },
             success: function (data) {
                 var data = jQuery.parseJSON(data)
                 if (data.status == 1) {
@@ -26,8 +30,9 @@ function formsubmit() {
 }
 
 
-function contactformsubmit() {
-    var opurl = apiURL+'/index.php?option=com_products&task=githubpages_contact_request';
+function contactformsubmit(xhrKnown) {
+    //var opurl = apiURL+'/index.php?option=com_products&task=githubpages_contact_request';
+    var opurl = apiURL+'/contact-us.php';
     var form = $("#contact");
     var url =
         $.ajax({
@@ -35,6 +40,9 @@ function contactformsubmit() {
             url: opurl,
             crossDomain: true,
             data: form.serialize(),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer "+xhrKnown);
+            },
             success: function (data) {
                 var data = jQuery.parseJSON(data)
                 if (data.status == 1) {
@@ -264,8 +272,8 @@ jQuery(document).ready(function () {
         },
         submitHandler: function (form) {
             // form.submit();
-            formsubmit()
-
+            // formsubmit();
+            getXhrKnown('release');
         }
     });
 
@@ -299,7 +307,7 @@ jQuery(document).ready(function () {
                 checkValidEmail: true
             },
             message: {
-                required: true
+                required: true,
             },
 
 
@@ -324,7 +332,7 @@ jQuery(document).ready(function () {
             },
 
             message: {
-                required: "Please enter the message."
+                required: "Please enter the message.",
             },
         },
         errorPlacement: function (error, element) {
@@ -332,22 +340,41 @@ jQuery(document).ready(function () {
         },
         submitHandler: function (form) {
             // form.submit();
-            contactformsubmit();
+            // contactformsubmit();
+            getXhrKnown('contact');
         }
     });
 
 });
 
-
-
-
-
-
 function hideError() {
     jQuery("[for=hiddenRecaptcha]").css("display", "none");
 }
 
-
 function cleanString(str) {
     return str.replace(/[^A-Za-z0-9,_()&reg;.-:{}$%@!~=+'&#39;`? ]/g, "");
+}
+
+function getXhrKnown(reqName){
+    $.ajax({
+        type: 'POST',
+        url: apiURL+'/xhr-known.php',
+        crossDomain: true,
+        beforeSend: function (xhr) {
+            //Show Loader
+            $(".overlay").show();
+        },
+        success: function (data) {
+            var dataObj = jQuery.parseJSON(data);
+            var xhrKnown = "";
+            if(dataObj.status == 1){
+                xhrKnown = dataObj.msg;
+                if(reqName == 'contact'){
+                    contactformsubmit(xhrKnown);
+                }else if(reqName == 'release'){
+                    formsubmit(xhrKnown);
+                }
+            }
+        }
+    });
 }
