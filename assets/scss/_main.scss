@@ -53,6 +53,32 @@ header ~ .uk-section{
         color:#fff;
     }
 }
+.uk-button-purple{
+    background-color: $purpleColor;
+    color:#fff;
+    transition: 0.5s;
+    &:hover{
+        background-color: darken($purpleColor, 20%);
+        color:#fff;
+    }
+}
+.responsiveTable{
+    .docTable{
+        border:1px solid #dbdbdb;
+        thead{
+            background-color: $blue;
+        }
+        th, td{
+            vertical-align: middle;
+            padding: 15px;
+        }
+        th{
+            color: #fff;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}
 @media (max-width:1199px){
     header~.uk-section{
         padding-top: 75px;

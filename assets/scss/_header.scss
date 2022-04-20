@@ -41,6 +41,14 @@
     & + .highlighter-rouge{
         display: none;
     }
+    & ~ h1[id], & ~ h2[id], & ~ h3[id], & ~ h4[id]{
+        &:before{
+            content: "";
+            display: block;
+            height: 105px;
+            margin-top: -105px;
+        }
+    }
 }
 @media (max-width:959px){
     .uk-navbar-container{

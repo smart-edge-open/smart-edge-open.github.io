@@ -7,6 +7,51 @@ permalink: /release-notes/
 <h1 class="uk-text-left">Release Notes</h1>
 
 <div class="noteLeft">
+    <p>April 15th, 2022</p>
+</div>
+
+<div class="noteRight">
+    <h3>Secure Access Service Edge Experience Kit (21.12)</h3>
+    <p>The 22.02 release of Intel&reg; Smart Edge Open features an updated Secure Access Services Edge (SASE) Experience Kit.</p>
+    <p>This preview release is available to a pool of early customer adopters. The full experience kit, featuring a full SD-WAN implementation, will be released in the second quarter of 2022. You can <a href="/" title="browse the documentation">browse the documentation</a> for the preview release or <a href="/request-license" title="request a license">request a license</a> for the upcoming full release.</p>
+    <a class="uk-button uk-button-info uk-button-small uk-margin-small-bottom">Added</a>
+    <p>Remote Attestation for Trusted Computing: Support for remote attestation using the Intel&reg; Security Libraries for Data Center (<a href="https://www.intel.com/content/www/us/en/architecture-and-technology/security-libraries-for-data-center-article.html?wapkw=security%20libraries" target="_blank" title="Intel&reg; SecL – DC" rel="nofollow">Intel&reg; SecL – DC</a>). Remote attestation is the foundation for trusted compute, providing verification of whether or not the operating system is trustworthy.</p>
+    <p>Trusted application enclaves: Support for trusted application enclaves using Intel&reg; Software Guard Extensions (<a href="https://www.intel.com/content/www/us/en/cloud-computing/confidential-computing-sgx-video.html?wapkw=SGX" target="_blank" title="Intel&reg; SGX" rel="nofollow">Intel&reg; SGX</a>). Creates a secure execution environment and provides encryption for communication beyond the enclave boundary.</p>
+    <p>Automated deployment: The Intel Edge Software Provisioning (ESP) tool has been added to automate the installation of the operating system and software stack on a bare-metal hardware platform. Deployment options include a SASE Cloud cluster, a SASE POP (point of presence) cluster, or on a SASE Edge cluster.</p>
+    <a class="uk-button uk-button-warning uk-button-small uk-margin-small-bottom">Known Issues</a>
+    <br><span>Edge Software Provisioner</span><br>
+    <span>There are two known intermittent issues with the Edge Software Provisioner (ESP):</span>
+    <ul>
+        <li>The ESP occasionally fails to build the USB image and exits with an error.</li>
+        <li>The ESP occasionally builds an incorrect image. In this case, the target system you are attempting to provision fails to boot.</li>
+    </ul>
+    <p>Until we are able to provide a fix, the recommendation for both of these cases is to simply retry the process.</p>
+    <p>The Edge Software Provisioner cannot boot USB images on machines that use a non-UEFI BIOS. Make sure that the system that will host the edge node has a UEFI BIOS.</p>
+    <p>When provisioning new nodes for an existing Developer Experience Kit deployment with Intel&reg; Software Guard Extensions (Intel&reg; SGX) enabled, Edge Software Provisioner may fail in cases when the Provisioning Certificate Caching Service module has exceeded 24 hours of runtime on an AWS cloud instance. In this case, reset Intel&reg; SGX using the “SGX Factory Reset” option in the BIOS.</p>
+    <p><span>Dell PowerEdge R750 servers</span><br>The Trusted Platform Management (TPM) endorsement key is not signed by a known Certificate Authority. The Intel&reg; SecL - DC libraries will fail to verify the endorsement key certificate. The system administrator must provision the root CA certificate of the TPM endorsement key to the host verification service in out-of-band mode.</p>
+    <h3>Private Wireless Experience Kit (22.01)</h3>
+    <a class="uk-button uk-button-info uk-button-small uk-margin-small-bottom">Added</a>
+    <p>The <a href="https://www.intel.com/content/www/us/en/developer/articles/reference-implementation/intelligent-connection-management.html" target="_blank" title="Intelligent Connection Management for Automated Handover" rel="nofollow">Intelligent Connection Management for Automated Handover</a> reference implementation demonstrates how to use machine learning to create a near-real-time RAN intelligent controller (RIC). The reference implementation leverages the Intel&reg; Distribution of OpenVINO&trade; toolkit to deliver low-latency AI inferencing to manage the association of mobile user equipment with available radio cells, optimizing for user throughput, cell coverage, and load balancing.</p>
+    <h3>Developer Experience Kit (21.12)</h3>
+    <a class="uk-button uk-button-purple uk-button-small uk-margin-small-bottom">Updated</a>
+    <p>Updated four <a href="/docs/product-overview/" target="_blank" title="reference implementations">reference implementations</a> for the Developer Experience Kit. These provide a reference for edge solution builders deploying multi-tenant services on the edge platform. They feature the following use cases:</p>
+    <ul>
+        <li><a href="https://www.intel.com/content/www/us/en/developer/articles/reference-implementation/wireless-network-ready-pcb-defect-detection.html" title="Industry 4.0" target="_blank" rel="nofollow">Industry 4.0</a></li>
+        <li><a href="https://www.intel.com/content/www/us/en/developer/articles/reference-implementation/wireless-network-ready-intelligent-traffic-management.html" title="Smart Cities" target="_blank" rel="nofollow">Smart Cities</a></li>
+        <li><a href="https://www.intel.com/content/www/us/en/developer/articles/reference-implementation/telehealth-remote-monitoring.html" title="eHealth" target="_blank" rel="nofollow">eHealth</a></li>
+        <li><a href="https://www.intel.com/content/www/us/en/developer/articles/reference-implementation/smart-vr-live-streaming-of-immersive-media.html" title="AR/VR Services" target="_blank" rel="nofollow">AR/VR Services</a></li>
+    </ul>
+    <p>Each reference implementation demonstrates how to use Node Feature Discovery (NFD) to match edge node resources with processing needs, and how to optimize communication between microservices with Calico CNI. The reference implementations incorporate Intel software frameworks including:</p>
+    <ul>
+        <li>Edge Insights for Industrial (EII)</li>
+        <li>The Intel&reg; Distribution of OpenVINOTM toolkit</li>
+        <li>Intel&reg; Collaboration Suite of WebRTC for Real-time Communication (RTC)</li>
+        <li>software libraries for media processing and acceleration</li>
+    </ul>
+    <br><br><br>
+</div>
+
+<div class="noteLeft">
     <p>January 28th, 2022</p>
 </div>
 
