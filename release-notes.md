@@ -11,7 +11,7 @@ permalink: /release-notes/
 </div>
 
 <div class="noteRight">
-    <h3>Secure Access Service Edge Experience Kit (21.12)</h3>
+    <h3>Secure Access Service Edge Experience Kit (22.02)</h3>
     <p>The 22.02 release of Intel&reg; Smart Edge Open features an updated Secure Access Services Edge (SASE) Experience Kit.</p>
     <p>This preview release is available to a pool of early customer adopters. The full experience kit, featuring a full SD-WAN implementation, will be released in the second quarter of 2022. You can <a href="/" title="browse the documentation">browse the documentation</a> for the preview release or <a href="/request-license" title="request a license">request a license</a> for the upcoming full release.</p>
     <a class="uk-button uk-button-info uk-button-small uk-margin-small-bottom">Added</a>
