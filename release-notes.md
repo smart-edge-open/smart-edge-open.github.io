@@ -7,6 +7,37 @@ permalink: /release-notes/
 <h1 class="uk-text-left">Release Notes</h1>
 
 <div class="noteLeft">
+    <p>May 15th, 2022</p>
+</div>
+
+
+<div class="noteRight">
+    <h3>Developer Experience Kit (22.03)</h3>
+    <p>The 22.03 release of Intel® Smart Edge Open features an updated Developer Experience Kit.</p>
+    <p>This release adds secure key management, management of virtual machines, and options for distributed storage.</p>
+    <a class="uk-button uk-button-info uk-button-small uk-margin-small-bottom">Added</a>
+    <h3>Secure key management</h3>
+    <p>The Key Management Reference Application (KMRA) provides end-to-end protection of customer private keys at runtime by provisioning them into Intel® Software Guard Extensions (Intel® SGX) enclaves.</p>
+    <p>The application supports multitenancy by running multiple instances of Intel® SGX enclaves.</p>
+    <p>The application also demonstrates how to integrate an Intel® SGX asymmetric key with a hardware security model (HSM) on a centralized key server. The reference application sets up an NGINX workload to access the private key in an Intel® SGX enclave on a 3rd Generation Intel® Xeon® Scalable processor, using the PublicKey Cryptography Standard #11 interface and OpenSSL. It uses Intel® SGX Data Center Attestation Primitives libraries to generate and verify the ECDSA-signed Intel® SGX quote.</p>
+    <h3>KubeVirt</h3>
+    <p>This open-source project extends Kubernetes with Virtual Machine (VM) support via custom resource definitions (CRDs). It allows non-containerized applications and workloads inside VMs to be treated as Kubernetes managed workloads. This lets VM, container, and pod applications to coexist within a shared Kubernetes environment, supporting communication between Kubernetes pods, VMs, and services on the same cluster.</p>
+    <h3>Rook-Ceph (storage orchestration solution)</h3>
+    <p>Integrated the Rook-Ceph storage orchestration solution to provide distributed storage for edge applications. This allows storage to be automatically provisioned at the user’s request. It improves data reliability by distributing storage across the cluster, reducing the risk of creating a single point of failure.</p>
+    <a class="uk-button uk-button-warning uk-button-small uk-margin-small-bottom">Known Issues</a>
+    <h3>Edge Software Provisioner (ESP):</h3>
+    <p>Occasionally, ESP fails to build the USB image and provisioning exits with an error. In this case, retry the ESP-based provisioning.</p>
+    <p>Occasionally, ESP will build the image incorrectly and the target system – the system you are installing the edge node on – will fail to boot using the image. In this case, retry the ESP-based provisioning.</p>
+    <p>Systems using legacy BIOS cannot boot from USB images. The target system must use a UEFI BIOS.</p>
+    <h3>Intel® Security Libraries for Data Center (Intel® SecL-DC):</h3>
+    <p>The Dell PowerEdge R750 TPM endorsement key is not signed by a known certificate authority. This causes the Intel® SecL-DC HVS application to fail to verify the TPM EK certificate. We are working on resolving this issue with Dell. As a workaround, the system administrator can provision the root CA certificate of the TPM endorsement key to HVS in out-of-band mode.</p>
+    <p>The trust agent is unable to read the Platform Configuration Register (PCR) logs from Nationz TPM in Dell R750. This causes the trust agent to fail to generate the attestation with PCR measurements, which causes the HVS create_flavor API call to fail. This will be addressed in an upcoming release.</p>
+    <h3>Intel® Software Guard Extensions (Intel® SGX):</h3>
+    <p><strong>When</strong> an existing Intel® Provisioning Certification Caching Service (PCCS) deployment located on an AWS instance has been running for over 24 hours, provisioning a new DEK cluster may fail. If this occurs, reset Intel® SGX using the "SGX Factory Reset" option in the BIOS.</p>
+    <br>
+</div>
+
+<div class="noteLeft">
     <p>April 15th, 2022</p>
 </div>
 
