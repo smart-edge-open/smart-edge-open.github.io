@@ -3,13 +3,10 @@ layout: page
 permalink: /release-notes/
 ---
 
-<!--{% include formspree.html email="my_name@gmail.com" redirect="/thanks/" name="true" subject="true" %}-->
 <h1 class="uk-text-left">Release Notes</h1>
-
 <div class="noteLeft">
     <p>June 29th, 2022</p>
 </div>
-
 
 <div class="noteRight">
     <h3>Secure Access Service Edge (SASE) Experience Kit (22.05)</h3>
@@ -69,11 +66,9 @@ permalink: /release-notes/
     <br>
 </div>
 
-
 <div class="noteLeft">
     <p>June 25th, 2022</p>
 </div>
-
 
 <div class="noteRight">
     <h3>Private Wireless Experience Kit (22.04)</h3>
@@ -103,7 +98,6 @@ permalink: /release-notes/
 <div class="noteLeft">
     <p>May 15th, 2022</p>
 </div>
-
 
 <div class="noteRight">
     <h3>Developer Experience Kit (22.03)</h3>
