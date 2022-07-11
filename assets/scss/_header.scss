@@ -34,12 +34,22 @@
 }
 #breadcrumbs{
     margin-bottom: 20px;
+    letter-spacing: 0;
+    padding-right: 140px;
     a{
         color: #00c7fd;
         font-weight: 600;
+        letter-spacing: 0;
+        &:hover{
+            text-decoration: none;
+        }
     }
     & + .highlighter-rouge{
         display: none;
+    }
+    & ~ h2[id], & ~ h3[id], & ~ h4[id]{
+        text-decoration: underline;
+        text-underline-offset: 7px;
     }
     & ~ h1[id], & ~ h2[id], & ~ h3[id], & ~ h4[id]{
         &:before{
@@ -47,6 +57,8 @@
             display: block;
             height: 105px;
             margin-top: -105px;
+            position: relative;
+            z-index: -1;
         }
     }
 }

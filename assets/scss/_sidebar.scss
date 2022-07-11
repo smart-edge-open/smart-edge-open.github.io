@@ -272,13 +272,48 @@
 }
 .sidebar-fixed-width{
     & + .uk-width-1-1{
-        article{
+        > article{
+            width:70%;
+            float: left;
             article{
                 .article-content{
                     table{
                         display: block;
                         max-width: 100%;
                         overflow-x: auto;
+                    }
+                }
+            }
+        }
+        .rightSidebar{
+            width: 17%;
+            margin-top: 15px;
+            position: fixed;
+            right: 40px;
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+            border-right: 1px solid #ccc;
+            color: #262626;
+            font-size: 18px;
+            ul{
+                padding-left: 0;
+                list-style-type: none;
+                margin-top: 10px;
+                li{
+                    margin-bottom: 15px;
+                    a{
+                        line-height: 20px;
+                        letter-spacing: 0px;
+                        color: #525252;
+                        font-size: 15px;
+                        &:hover, &:focus{
+                            text-decoration: none;
+                            color: $blue;
+                        }
+                        &.active{
+                            color: $blue;
+                            font-weight: bold;
+                        }
                     }
                 }
             }
@@ -293,6 +328,14 @@
     }
 }
 @media (max-width:1199px){
+    .sidebar-fixed-width+.uk-width-1-1{
+        >article{
+            width:100%;
+        }
+        .rightSidebar{
+            display: none;
+        }
+    } 
     .sidebar-docs{
         padding-right: 15px;
         .leftSection{

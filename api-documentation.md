@@ -27,7 +27,7 @@ title: API Documentation
 
 <section class="inner-page-padding" id="swagger-ui">
     <div id="api-heading">
-        <h1 class="uk-article-title blog-title uk-margin-remove-bottom">API Documentation</h1>
+        <h1 class="blog-title uk-margin-remove-bottom">API Documentation</h1>
         <div class="boxHead boxHeadExplore boxAPI uk-child-width-1-3@m uk-grid-match uk-text-center uk-grid uk-grid-stack" data-uk-grid="">
             <div class="uk-first-column">
                 <div class="boxHeadBox uk-card uk-card-default uk-box-shadow-medium uk-card-hover uk-card-body uk-inline border-radius-large border-xlight">

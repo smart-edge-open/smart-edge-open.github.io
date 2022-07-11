@@ -37,6 +37,12 @@ navbar:
 # Google analytics code, get your code here https://www.google.com/analytics/
 google_analytics: true
 
+# Number of posts displayed on blog page
+paginate:           10
+
+# Blog path
+paginate_path:      "/blog/:num/"
+
 # Path to post content assets directory i.e post images, pdfs etc
 uploads:            /uploads/
 
