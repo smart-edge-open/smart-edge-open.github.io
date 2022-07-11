@@ -72,6 +72,16 @@
             }
         }
     }
+    &.boxAPI{
+        margin-bottom: 100px;
+        .boxHeadBox{
+            padding: 15px 25px;
+            ul{
+                padding-left: 0;
+                margin-bottom: 15px !important;
+            }
+        }
+    }
 }
 @media (min-width:960px){
     .boxHead.boxes5 .boxHeadBox:not(:nth-child(3n)):after{

@@ -96,6 +96,7 @@ var apiURL = '{{ site.apiURL }}';
 					</div>
                 </div>
 			</div> -->	
+            <div style="margin-top: 20px;color: #222;">By submitting you are agreeing to our <a href="https://www.intel.com/content/www/us/en/privacy/intel-privacy-notice.html" rel="nofollow" target="_blank" title="Privacy Agreement">Privacy Agreement</a></div>
             <div>	
                 <input type="submit" id="sub" name="requestAccess" value="Send Message" title="Send Message" class="uk-button uk-button-primary uk-button-large uk-margin-medium-top contact-btn">
             </div>
@@ -103,8 +104,16 @@ var apiURL = '{{ site.apiURL }}';
     </div>
 </div>
 
-<div class="formRight">
+<div class="formRight section-featured">
     <p>Source code for certain* experience kits is available under the terms and conditions of Intel’s “Smart Edge Open license” (the “SEO license”). Experience kit source code is provided “as-is,” free of charge, and at Intel’s sole discretion.</p>
     <p>Access to experience kit source code will be granted within 5 business days of execution (electronic or otherwise) of the SEO license.</p>
     <p>*The Smart Edge Open Developer Experience Kit is available under the Apache 2.0 license.</p>
+    <ul class="uk-list uk-list-large uk-margin-medium-top">
+        <li>
+            <a class="uk-box-shadow-hover-small" href="https://www.intel.com/content/www/us/en/privacy/intel-privacy-notice.html" rel="nofollow" target="_blank" title="Privacy Policy">
+                <span class="linkHead">Privacy Policy</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="#0068B5" stroke-width="1.03" points="7 4 13 10 7 16"></polyline></svg>
+            </a>
+        </li>
+    </ul>
 </div>
